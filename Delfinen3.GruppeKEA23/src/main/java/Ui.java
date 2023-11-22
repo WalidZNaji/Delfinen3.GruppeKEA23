@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Ui {
@@ -7,80 +8,96 @@ public class Ui {
     public Ui() {
         scan = new Scanner(System.in);
         controller = new Controller();
-
     }
     public void startProgram() {
-        boolean runAgain = true;
         startMessage();
         startMenu();
-
-
-
-
-
-
-
     }
     public void startMessage() {
         System.out.println("Velkommen til Svømmeklubben Delfinen!");
     }
     public void startMenu() {
         int userInput = 0;
+        boolean runAgain = true;
 
-
-        while (true) {
+        while (runAgain) {
             System.out.println("Log ind som:");
             System.out.print("""
                 1. Formand
                 2. Træner
                 3. Kasserer
                 4. Elev
+                5. Afslut program
                 """);
 
-            if (scan.hasNextInt()) {
+            /*if (scan.hasNextInt()) {
                 userInput = scan.nextInt();
-                if (userInput < 1 || userInput > 4) {
+                if (userInput < 1 || userInput > 5) {
                     System.out.println("Ugyldigt input. Indtast et tal mellem 1-4");
                     scan.nextLine();
                 }
-
-                switch (userInput) {
-
-                    case 1 -> {
-                        System.out.println("Du er logget ind som formand.");
-                        formandMenu();
+                */
+            try {
+                userInput = Integer.parseInt(scan.nextLine());
+                if (userInput < 1 || userInput > 5) {
+                    System.out.println("Ugyldigt input. Indtast et tal mellem 1-5");
+                } else {
+                    switch (userInput) {
+                        case 1 -> {
+                            System.out.println("Du er logget ind som formand.");
+                            formandMenu();
+                        }
+                        case 2 -> {
+                            System.out.println("Du er logget ind som træner");
+                        }
+                        case 3 -> {
+                            System.out.println("Du er logget ind som kasserer");
+                        }
+                        case 4 -> {
+                            System.out.println("Du er logget ind som elev");
+                        }
+                        case 5 -> {
+                            System.out.println("Programmet er lukket.");
+                            runAgain = false;
+                        }
 
                     }
-                    case 2 -> {
-                        System.out.println("Du er logget ind som træner");
-                    }
-                    case 3 -> {
-                        System.out.println("Du er logget ind som kasserer");
-                    }
-                    case 4 -> {
-                        System.out.println("Du er logget ind som elev");
-                    }
-
                 }
+            } catch (NumberFormatException e) {
+                System.out.println("Ugyldigt input. Indtast et tal mellem 1-5");
             }
         }
     }
+
     public void formandMenu () {
-        System.out.print("""
-                    1. Opret medlem.
+        boolean runAgain = true;
+        int formandInput;
+
+        while (runAgain) {
+            System.out.print("""
+                    1. Opret medlem
+                    5. Tilbage til hovedmenu
                     """);
-        int formandInput = scan.nextInt();
-        switch (formandInput) {
-            case 1 -> {
-                createMedlem();
-                System.out.println();
+            try {
+                formandInput = Integer.parseInt(scan.nextLine());
+                if (formandInput < 1 || formandInput > 5) {
+                    System.out.println("Ugyldigt input. Indtast et tal mellem 1-5");
+                } else {
+                    switch (formandInput) {
+                        case 1 -> {
+                            createMedlem();
+                        }
+                        case 5 -> {
+                            runAgain = false;
+                        }
+                    }
+                }
+            } catch (NumberFormatException e ) {
+                System.out.println("Ugyldigt input. Indtast et tal mellem 1-5");
             }
+
         }
     }
-
-
-
-
     public void createMedlem() {
         scan.nextLine(); // scanner bug
         System.out.print("Indtast navn på Medlem: ");
@@ -112,11 +129,7 @@ public class Ui {
 
         System.out.println(medlemName + " er blevet tilføjet til databasen.");
 
-        formandMenu();
-
-
     }
     public void loginErrorHandling(){
-
     }
 }
