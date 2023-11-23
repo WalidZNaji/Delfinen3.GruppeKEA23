@@ -10,7 +10,7 @@ public class Filehandler {
     PrintStream fileWriter;
 
     Scanner fileReader;
-    ArrayList<Medlem> medlemmereICSV = new ArrayList<>();
+   ArrayList<Medlem> medlemmereICSV = new ArrayList<>();
     File file = new File("Medlemmere.csv");
 
 
@@ -38,7 +38,6 @@ public class Filehandler {
 
 
     }
-
     public ArrayList<Medlem> loadMedlemmereFromCSV() {
         try {
             fileReader = new Scanner(file);
@@ -46,6 +45,7 @@ public class Filehandler {
             ;
             if (fileReader.hasNextLine()) {
                 fileReader.nextLine(); // Skip the header
+            }
                 while (fileReader.hasNext()) {
                     String linje = fileReader.nextLine();
                     String[] attributes = linje.split(",");

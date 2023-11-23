@@ -76,6 +76,7 @@ public class Ui {
         while (runAgain) {
             System.out.print("""
                     1. Opret medlem
+                    2. Vis medlemsoversigt
                     5. Tilbage til hovedmenu
                     """);
             try {
@@ -86,6 +87,9 @@ public class Ui {
                     switch (formandInput) {
                         case 1 -> {
                             createMedlem();
+                        }
+                        case 2 -> {
+                            medlemsOversigt();
                         }
                         case 5 -> {
                             runAgain = false;
@@ -127,5 +131,46 @@ public class Ui {
 
     }
 
+    public void medlemsOversigt() {
+        System.out.println(controller.getMedlemmere());
     }
+
+
+
+    public int getIntegerInput() {
+        while (true) {
+            try {
+                return scan.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Ugyldig indtastning. Brug hel tal.");
+                scan.nextLine();
+            }
+        }
+    }
+    public boolean getBooleanInput() {
+        while (true) {
+            try {
+                String input = scan.next();
+                if (input.equalsIgnoreCase("y")) {
+                    return true;
+                } else if (input.equalsIgnoreCase("n")) {
+                        return false;
+                    } else {
+                    System.out.println("Ugyldig indtastning. Indtast 'y' eller 'n'. Prøv igen.");
+                }
+                } catch (InputMismatchException e) {
+                System.out.println("Ugyldig indtastning. Indtast 'y' eller 'n'. Prøv igen.");
+                scan.nextLine();
+            }
+
+        }
+    }
+    public void loadMedlememreFraCSV() {
+        ArrayList<Medlem> loadedMedlememre = controller.loadMedlemmereFraCSV();
+        controller.loadMedlemmereFraCSV();
+    }
+
+}
+
+
 

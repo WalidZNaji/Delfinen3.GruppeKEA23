@@ -58,4 +58,18 @@ public class Medlem {
         this.aktiv = aktiv;
     }
 
+    public String toString() {
+
+        String konkurrenceSvømmer = isKonkurrenceSvømmer() ? "Konkurrencesvømmer" : "Ikke Konkurrencesvømmer";
+        String aktiv = isKonkurrenceSvømmer() ? "Aktiv" : "Ikke Aktiv";
+
+        return "\n" + "Navn: " + name + "\n"  +
+                  "Alder: " + age + "\n"  +
+                   "Medlemsid: " + medlemID + "\n"  +
+                    "Niveau: " + konkurrenceSvømmer + "\n" +
+                "Aktiv/Uaktiv: " +  aktiv  + "\n" +  "\u2500".repeat(50);
+
+    }
+
+
 }
