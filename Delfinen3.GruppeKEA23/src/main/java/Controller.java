@@ -19,5 +19,9 @@ public class Controller {
     public ArrayList<Medlem> getMedlemmere() {
         return database.medlemmere;
     }
+    public ArrayList<Medlem> loadMedlemmereFraCSV () {
+        database.loadMedlemmerFraCSV();
+        return null;
+    }
 
 }

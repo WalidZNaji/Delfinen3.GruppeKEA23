@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Ui {
@@ -10,6 +11,7 @@ public class Ui {
         controller = new Controller();
     }
     public void startProgram() {
+        loadMedlememreFraCSV();
         startMessage();
         startMenu();
     }
@@ -94,34 +96,30 @@ public class Ui {
         }
     }
     public void createMedlem() {
-        System.out.print("Indtast navn på Medlem: ");
-        String medlemName = scan.nextLine();
-        System.out.print("Indtast alder på Medlem: ");
-        int medlemAge = scan.nextInt();
-        System.out.print("Indtast medlemsID: ");
-        int medlemID = scan.nextInt();
+        try {
+            System.out.print("Indtast navn på Medlem: ");
+            String medlemName = scan.nextLine();
+            System.out.print("Indtast alder på Medlem: ");
+            int medlemAge = getIntegerInput();
+            System.out.print("Indtast medlemsID: ");
+            int medlemID = getIntegerInput();
+
+            System.out.print("Konkurrence svømmer? [y/n]: ");
+            boolean konkurrenceSvømmerYesNo = getBooleanInput();
 
 
-        System.out.print("Konkurrence svømmer? [y/n]: ");
-        String konkurrenceSvømmerYesNo = scan.next();
-        boolean konkurrenceSvømmer;
-        if (konkurrenceSvømmerYesNo.equalsIgnoreCase("y")) {
-            konkurrenceSvømmer = true;
-        } else konkurrenceSvømmer = false;
-        scan.nextLine(); // scanner bug
+            System.out.print("Aktivt medlem? [y/n]: ");
+            boolean aktivYesNo = getBooleanInput();
 
-        System.out.print("Aktivt medlem? [y/n]: ");
-        String aktivYesNo = scan.nextLine();
-        boolean aktiv;
-        if(aktivYesNo.equalsIgnoreCase("y")){
-            aktiv = true;
-        }else aktiv=false;
+            controller.addMedlem(medlemName, medlemAge, medlemID,
+                    konkurrenceSvømmerYesNo, aktivYesNo);
 
-
-        controller.addMedlem(medlemName, medlemAge, medlemID,
-                konkurrenceSvømmer, aktiv);
-
-        System.out.println(medlemName + " er blevet tilføjet til databasen.");
+            System.out.println(medlemName + " er blevet tilføjet til databasen.");
+            scan.nextLine();
+        } catch (InputMismatchException e) {
+            System.out.println("Ugyldig indtastning. Prøv igen.");
+            scan.nextLine();
+        }
 
     }
 
