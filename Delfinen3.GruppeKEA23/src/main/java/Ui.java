@@ -10,14 +10,17 @@ public class Ui {
         scan = new Scanner(System.in);
         controller = new Controller();
     }
+
     public void startProgram() {
         loadMedlememreFraCSV();
         startMessage();
         startMenu();
     }
+
     public void startMessage() {
         System.out.println("Velkommen til Svømmeklubben Delfinen!");
     }
+
     public void startMenu() {
         int userInput = 0;
         boolean runAgain = true;
@@ -25,12 +28,12 @@ public class Ui {
         while (runAgain) {
             System.out.println("Log ind som:");
             System.out.print("""
-                1. Formand
-                2. Træner
-                3. Kasserer
-                4. Elev
-                5. Afslut program
-                """);
+                    1. Formand
+                    2. Træner
+                    3. Kasserer
+                    4. Elev
+                    5. Afslut program
+                    """);
 
             try {
                 userInput = Integer.parseInt(scan.nextLine());
@@ -66,7 +69,7 @@ public class Ui {
         }
     }
 
-    public void formandMenu () {
+    public void formandMenu() {
         boolean runAgain = true;
         int formandInput;
 
@@ -89,12 +92,13 @@ public class Ui {
                         }
                     }
                 }
-            } catch (NumberFormatException e ) {
+            } catch (NumberFormatException e) {
                 System.out.println("Ugyldigt input. Indtast et tal mellem 1-5");
             }
 
         }
     }
+
     public void createMedlem() {
         try {
             System.out.print("Indtast navn på Medlem: ");
