@@ -9,3 +9,5 @@ public class Database {
         medlemmere.add(new Medlem(name, age, medlemID, konkurrenceSvømmer,aktiv));
     }
 }
+
+

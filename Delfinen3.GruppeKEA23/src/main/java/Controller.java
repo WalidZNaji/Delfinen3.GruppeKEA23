@@ -10,4 +10,11 @@ public class Controller {
         database.medlemmere.add(new Medlem(name, age, medlemID,
                 konkurrenceSvømmer,aktiv));
     }
+    public void gemTilCSV (ArrayList<Medlem> medlemmere){
+        database.gemMedlemmereTilCSV(medlemmere);
+    }
+    public ArrayList<Medlem> getMedlemmere() {
+        return database.medlemmere;
+    }
+
 }

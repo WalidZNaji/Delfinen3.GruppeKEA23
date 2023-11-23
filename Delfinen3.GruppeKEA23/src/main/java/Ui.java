@@ -1,4 +1,4 @@
-import java.util.InputMismatchException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -30,13 +30,6 @@ public class Ui {
                 5. Afslut program
                 """);
 
-            /*if (scan.hasNextInt()) {
-                userInput = scan.nextInt();
-                if (userInput < 1 || userInput > 5) {
-                    System.out.println("Ugyldigt input. Indtast et tal mellem 1-4");
-                    scan.nextLine();
-                }
-                */
             try {
                 userInput = Integer.parseInt(scan.nextLine());
                 if (userInput < 1 || userInput > 5) {
@@ -99,7 +92,6 @@ public class Ui {
         }
     }
     public void createMedlem() {
-        scan.nextLine(); // scanner bug
         System.out.print("Indtast navn på Medlem: ");
         String medlemName = scan.nextLine();
         System.out.print("Indtast alder på Medlem: ");
@@ -132,4 +124,4 @@ public class Ui {
     }
     public void loginErrorHandling(){
     }
-}
+
