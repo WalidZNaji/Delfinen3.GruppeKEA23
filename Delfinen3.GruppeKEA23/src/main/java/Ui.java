@@ -52,6 +52,8 @@ public class Ui {
                         case 5 -> {
                             System.out.println("Programmet er lukket.");
                             runAgain = false;
+                            controller.gemTilCSV(controller.getMedlemmere());
+
                         }
 
                     }
@@ -122,6 +124,6 @@ public class Ui {
         System.out.println(medlemName + " er blevet tilføjet til databasen.");
 
     }
-    public void loginErrorHandling(){
+
     }
 

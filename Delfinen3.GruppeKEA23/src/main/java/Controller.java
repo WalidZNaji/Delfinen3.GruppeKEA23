@@ -1,8 +1,11 @@
+import java.util.ArrayList;
+
 public class Controller {
     private Database database;
 
     public Controller() {
         this.database = new Database();
+         database.loadMedlemmerFraCSV();
     }
     public void addMedlem(String name, int age, int medlemID,
                           boolean konkurrenceSvømmer,
