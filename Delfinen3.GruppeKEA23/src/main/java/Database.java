@@ -20,8 +20,8 @@ public class Database {
         filehandler.gemTilCSV(medlemmere);
     }
 
-    public void loadMedlemmerFraCSV(){
-        filehandler.loadMedlemmereFromCSV();
+    public ArrayList<Medlem> loadMedlemmereFromCSV() {
+       return filehandler.loadMedlemmereFromCSV();
     }
 
 }

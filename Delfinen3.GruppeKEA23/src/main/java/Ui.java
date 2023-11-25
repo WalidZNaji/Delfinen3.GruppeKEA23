@@ -12,7 +12,7 @@ public class Ui {
     }
 
     public void startProgram() {
-        loadMedlememreFraCSV();
+        //loadMedlememreFraCSV();
         startMessage();
         startMenu();
     }
@@ -89,7 +89,12 @@ public class Ui {
                             createMedlem();
                         }
                         case 2 -> {
-                            medlemsOversigt();
+                            //medlemsOversigt();
+                            ArrayList<Medlem> per = controller.loadMedlemmereFraCSV();
+                            for (Medlem m:per) {
+                                System.out.println(m + ", ");
+                            }
+
                         }
                         case 5 -> {
                             runAgain = false;
@@ -132,9 +137,11 @@ public class Ui {
     }
 
     public void medlemsOversigt() {
-        System.out.println(controller.getMedlemmere());
+        ArrayList<Medlem> listeFraCSV = controller.loadMedlemmereFraCSV();
+        for (Medlem m:listeFraCSV) {
+            System.out.println(m);
+        }
     }
-
 
 
     public int getIntegerInput() {
@@ -165,10 +172,13 @@ public class Ui {
 
         }
     }
+    /*
     public void loadMedlememreFraCSV() {
         ArrayList<Medlem> loadedMedlememre = controller.loadMedlemmereFraCSV();
         controller.loadMedlemmereFraCSV();
     }
+
+     */
 
 }
 

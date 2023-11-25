@@ -5,8 +5,7 @@ public class Controller {
 
     public Controller() {
         this.database = new Database();
-
-
+        //database.loadMedlemmereFromCSV();
     }
     public void addMedlem(String name, int age, int medlemID,
                           boolean konkurrenceSvømmer,
@@ -21,9 +20,10 @@ public class Controller {
     public ArrayList<Medlem> getMedlemmere() {
         return database.medlemmere;
     }
+
     public ArrayList<Medlem> loadMedlemmereFraCSV () {
-        database.loadMedlemmerFraCSV();
-        return null;
+        return database.loadMedlemmereFromCSV();
+
     }
 
 }

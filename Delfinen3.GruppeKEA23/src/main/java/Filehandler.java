@@ -36,14 +36,13 @@ public class Filehandler {
 
     public ArrayList<Medlem> loadMedlemmereFromCSV() {
         // Ny ArrayList til at gemme loaded Medlem objects
-        ArrayList<Medlem> medlemmereICSV = new ArrayList<>();
 
         try (Scanner fileReader = new Scanner(file)) {
+            //ArrayList<Medlem> medlemmereICSV = new ArrayList<>();
             if (file.length() == 0) {
                 // File is empty, no need to read anything
                 return medlemmereICSV;
             }
-
             // Skipping the header
             fileReader.nextLine();
 
