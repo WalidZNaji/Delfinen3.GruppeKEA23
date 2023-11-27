@@ -6,13 +6,13 @@ public class Ui {
     private final Scanner scan;
     private final Controller controller;
 
+
     public Ui() {
         scan = new Scanner(System.in);
         controller = new Controller();
     }
 
     public void startProgram() {
-        //loadMedlememreFraCSV();
         startMessage();
         startMenu();
     }
@@ -57,7 +57,7 @@ public class Ui {
                         case 5 -> {
                             System.out.println("Programmet er lukket.");
                             runAgain = false;
-                            controller.gemTilCSV(controller.getMedlemmere());
+                            controller.gemTilCSV(controller.newlyMadeMedlemmere);
 
                         }
 
@@ -89,12 +89,7 @@ public class Ui {
                             createMedlem();
                         }
                         case 2 -> {
-                            //medlemsOversigt();
-                            ArrayList<Medlem> per = controller.loadMedlemmereFraCSV();
-                            for (Medlem m:per) {
-                                System.out.println(m + ", ");
-                            }
-
+                            medlemsOversigt();
                         }
                         case 5 -> {
                             runAgain = false;
@@ -109,6 +104,7 @@ public class Ui {
     }
 
     public void createMedlem() {
+
         try {
             System.out.print("Indtast navn på Medlem: ");
             String medlemName = scan.nextLine();
@@ -124,7 +120,12 @@ public class Ui {
             System.out.print("Aktivt medlem? [y/n]: ");
             boolean aktivYesNo = getBooleanInput();
 
+            // Adder til oprindelig.
             controller.addMedlem(medlemName, medlemAge, medlemID,
+                    konkurrenceSvømmerYesNo, aktivYesNo);
+
+            // Adder til newly made så det kun er den vi gemmer til CSV under 'exit'.
+            controller.addToNewlyMadeMedlemmere(medlemName, medlemAge, medlemID,
                     konkurrenceSvømmerYesNo, aktivYesNo);
 
             System.out.println(medlemName + " er blevet tilføjet til databasen.");
