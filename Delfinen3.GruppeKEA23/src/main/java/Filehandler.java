@@ -15,7 +15,7 @@ public class Filehandler {
 
     public void gemTilCSV(ArrayList<Medlem> medlemmere) {
         try {
-            fileWriter = new PrintStream(new FileOutputStream(file, true)); // Set append to true
+            fileWriter = new PrintStream(new FileOutputStream(file, true));
 
             if(file.length()==0) {
                 fileWriter.println("Name,Age,MedlemID,KonkurrenceSvømmer,Aktiv");
@@ -35,12 +35,11 @@ public class Filehandler {
     }
 
     public ArrayList<Medlem> loadMedlemmereFromCSV() {
-        // Ny ArrayList til at gemme loaded Medlem objects
+
 
         try (Scanner fileReader = new Scanner(file)) {
-            //ArrayList<Medlem> medlemmereICSV = new ArrayList<>();
             if (file.length() == 0) {
-                // File is empty, no need to read anything
+                // File is empty
                 return medlemmereICSV;
             }
             // Skipping the header
@@ -63,9 +62,3 @@ public class Filehandler {
     }
 
 }
-
-
-
-
-
-

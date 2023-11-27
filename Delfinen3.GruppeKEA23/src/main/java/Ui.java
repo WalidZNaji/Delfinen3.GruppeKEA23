@@ -13,6 +13,8 @@ public class Ui {
     }
 
     public void startProgram() {
+        //controller.loadMedlemmereFraCSV(); Hvis vi loader fra start så viser den 2x under 'vis oversigt' da den også loader.
+        // Måske kan man hive Objekterne ud af listen og bare vise den under vis oversigt, og ikke loade direkte?
         startMessage();
         startMenu();
     }
@@ -128,7 +130,7 @@ public class Ui {
             controller.addToNewlyMadeMedlemmere(medlemName, medlemAge, medlemID,
                     konkurrenceSvømmerYesNo, aktivYesNo);
 
-            System.out.println(medlemName + " er blevet tilføjet til databasen.");
+            System.out.println(medlemName + " bliver tilføjet til databasen så snart programmet lukkes."); // Dobbelt tjek Mads' krav.
             scan.nextLine();
         } catch (InputMismatchException e) {
             System.out.println("Ugyldig indtastning. Prøv igen.");
@@ -173,13 +175,6 @@ public class Ui {
 
         }
     }
-    /*
-    public void loadMedlememreFraCSV() {
-        ArrayList<Medlem> loadedMedlememre = controller.loadMedlemmereFraCSV();
-        controller.loadMedlemmereFraCSV();
-    }
-
-     */
 
 }
 

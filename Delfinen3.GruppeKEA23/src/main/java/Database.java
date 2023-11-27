@@ -5,16 +5,11 @@ public class Database {
 
     ArrayList<Medlem> medlemmere  = filehandler.medlemmereICSV;
 
-    //public Database() {
-    //}
-
     public void addMedlem(String name, int age, int medlemID, boolean konkurrenceSvømmer,
                           boolean aktiv) {
 
             medlemmere.add(new Medlem(name, age, medlemID, konkurrenceSvømmer,aktiv));
         }
-
-
 
     public void gemMedlemmereTilCSV(ArrayList<Medlem> medlemmere){
         filehandler.gemTilCSV(medlemmere);

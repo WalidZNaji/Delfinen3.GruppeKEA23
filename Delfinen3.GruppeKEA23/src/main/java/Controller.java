@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Controller {
-    private Database database;
+    private final Database database;
     ArrayList<Medlem> newlyMadeMedlemmere = new ArrayList<>();
 
     public Controller() {
