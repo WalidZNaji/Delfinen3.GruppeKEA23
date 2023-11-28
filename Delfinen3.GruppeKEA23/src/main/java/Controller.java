@@ -2,10 +2,12 @@ import java.util.ArrayList;
 
 public class Controller {
     private final Database database;
+    private  final Kasserer kasserer;
     ArrayList<Medlem> newlyMadeMedlemmere = new ArrayList<>();
 
     public Controller() {
         this.database = new Database();
+        this.kasserer = new Kasserer();
     }
 
     public void udregnIndkomst(){
