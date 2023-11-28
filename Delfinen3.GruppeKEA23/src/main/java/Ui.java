@@ -43,17 +43,11 @@ public class Ui {
                 } else {
                     switch (userInput) {
                         case 1 -> {
-                            System.out.println("Du er logget ind som formand.");
-                            formandMenu();
+                            administrativ();
                         }
                         case 2 -> {
-                            System.out.println("Du er logget ind som træner");
-                        }
-                        case 3 -> {
-                            System.out.println("Du er logget ind som kasserer");
-                        }
-                        case 4 -> {
-                            System.out.println("Du er logget ind som elev");
+                            // træner
+
                         }
                         case 5 -> {
                             System.out.println("Programmet er lukket.");
@@ -70,9 +64,9 @@ public class Ui {
         }
     }
 
-    public void formandMenu() {
+    public void administrativ() {
         boolean runAgain = true;
-        int formandInput;
+        int userInput;
 
         while (runAgain) {
             System.out.print("""
@@ -81,18 +75,22 @@ public class Ui {
                     5. Tilbage til hovedmenu
                     """);
             try {
-                formandInput = Integer.parseInt(scan.nextLine());
-                if (formandInput < 1 || formandInput > 5) {
-                    System.out.println("Ugyldigt input. Indtast et tal mellem 1-5");
+                userInput = Integer.parseInt(scan.nextLine());
+                if (userInput < 1 || userInput > 4) {
+                    System.out.println("Ugyldigt input. Indtast et tal mellem 1-4");
                 } else {
-                    switch (formandInput) {
+                    switch (userInput) {
                         case 1 -> {
                             createMedlem();
                         }
                         case 2 -> {
                             medlemsOversigt();
                         }
-                        case 5 -> {
+                        case 3 -> {
+                            System.out.println("Samlet indkomst: ");
+                            System.out.println(controller.udregnIndkomst() + "kr");
+                        }
+                        case 4 -> {
                             runAgain = false;
                         }
                     }

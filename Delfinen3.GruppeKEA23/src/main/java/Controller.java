@@ -7,7 +7,7 @@ public class Controller {
 
     public Controller() {
         this.database = new Database();
-        this.kasserer = new Kasserer();
+        this.kasserer = new Kasserer(this);
     }
 
     public void udregnIndkomst(){

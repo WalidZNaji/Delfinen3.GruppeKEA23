@@ -2,8 +2,10 @@ public class Kasserer {
 
     private Controller controller;
 
-
-    public void generateIncomeOverview() {
+    public Kasserer(Controller controller) {
+        this.controller = controller;
+    }
+    public double generateIncomeOverview() {
             double totalIndkomst = 0.0;
 
 
@@ -19,7 +21,7 @@ public class Kasserer {
             double passivIndkomst = udregnPassivIndkomst();
             totalIndkomst += passivIndkomst;
 
-            System.out.println("Samlet forventet indtægt: " + totalIndkomst + " kr.");
+            return totalIndkomst;
         }
 
         private double udregnUngeIndkomst() {
