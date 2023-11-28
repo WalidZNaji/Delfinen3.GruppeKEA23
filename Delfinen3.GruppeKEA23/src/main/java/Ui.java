@@ -13,8 +13,7 @@ public class Ui {
     }
 
     public void startProgram() {
-        //controller.loadMedlemmereFraCSV(); Hvis vi loader fra start så viser den 2x under 'vis oversigt' da den også loader.
-        // Måske kan man hive Objekterne ud af listen og bare vise den under vis oversigt, og ikke loade direkte?
+        controller.loadMedlemmereFraCSV();
         startMessage();
         startMenu();
     }
@@ -140,7 +139,7 @@ public class Ui {
     }
 
     public void medlemsOversigt() {
-        ArrayList<Medlem> listeFraCSV = controller.loadMedlemmereFraCSV();
+        ArrayList<Medlem> listeFraCSV = controller.getMedlemmere();
         for (Medlem m:listeFraCSV) {
             System.out.println(m);
         }

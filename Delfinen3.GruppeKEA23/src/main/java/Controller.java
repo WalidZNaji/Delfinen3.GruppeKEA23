@@ -7,6 +7,12 @@ public class Controller {
     public Controller() {
         this.database = new Database();
     }
+
+    public void udregnIndkomst(){
+        kasserer.generateIncomeOverview();
+    }
+
+
     public void addToNewlyMadeMedlemmere(String name, int age, int medlemID,
                                          boolean konkurrenceSvømmer,
                                          boolean aktiv) {
@@ -27,8 +33,8 @@ public class Controller {
         return database.medlemmere;
     }
 
-    public ArrayList<Medlem> loadMedlemmereFraCSV () {
-        return database.loadMedlemmereFromCSV();
+    public void loadMedlemmereFraCSV () {
+         database.loadMedlemmereFromCSV();
 
     }
 

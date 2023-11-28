@@ -34,13 +34,11 @@ public class Filehandler {
         }
     }
 
-    public ArrayList<Medlem> loadMedlemmereFromCSV() {
+    public void loadMedlemmereFromCSV() {
 
 
         try (Scanner fileReader = new Scanner(file)) {
             if (file.length() == 0) {
-                // File is empty
-                return medlemmereICSV;
             }
             // Skipping the header
             fileReader.nextLine();
@@ -55,7 +53,6 @@ public class Filehandler {
                         Boolean.parseBoolean(attributes[4].trim()));
                 medlemmereICSV.add(medlem);
             }
-            return medlemmereICSV;
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

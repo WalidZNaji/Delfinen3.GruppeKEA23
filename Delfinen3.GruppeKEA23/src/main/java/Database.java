@@ -15,8 +15,8 @@ public class Database {
         filehandler.gemTilCSV(medlemmere);
     }
 
-    public ArrayList<Medlem> loadMedlemmereFromCSV() {
-       return filehandler.loadMedlemmereFromCSV();
+    public void loadMedlemmereFromCSV() {
+        filehandler.loadMedlemmereFromCSV();
     }
 
 }
