@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Database {
     Filehandler filehandler = new Filehandler();
 
-    ArrayList<Medlem> medlemmere  = filehandler.medlemmereICSV;
+    ArrayList<Medlem> medlemmere;
 
     public void addMedlem(String name, int age, int medlemID, boolean konkurrenceSvømmer,
                           boolean aktiv) {
@@ -11,12 +11,12 @@ public class Database {
             medlemmere.add(new Medlem(name, age, medlemID, konkurrenceSvømmer,aktiv));
         }
 
-    public void gemMedlemmereTilCSV(ArrayList<Medlem> medlemmere){
+    public void gemMedlemmereTilCSV(){
         filehandler.gemTilCSV(medlemmere);
     }
 
     public void loadMedlemmereFromCSV() {
-        filehandler.loadMedlemmereFromCSV();
+        medlemmere = filehandler.loadMedlemmereFromCSV();
     }
 
 }

@@ -50,7 +50,7 @@ public class Ui {
                         case 3 -> {
                             System.out.println("Programmet er lukket.");
                             runAgain = false;
-                            controller.gemTilCSV(controller.newlyMadeMedlemmere);
+                            controller.gemTilCSV();
 
                         }
 
@@ -122,9 +122,6 @@ public class Ui {
             controller.addMedlem(medlemName, medlemAge, medlemID,
                     konkurrenceSvømmerYesNo, aktivYesNo);
 
-            // Adder til newly made så det kun er den vi gemmer til CSV under 'exit'.
-            controller.addToNewlyMadeMedlemmere(medlemName, medlemAge, medlemID,
-                    konkurrenceSvømmerYesNo, aktivYesNo);
 
             System.out.println(medlemName + " bliver tilføjet til databasen så snart programmet lukkes."); // Dobbelt tjek Mads' krav.
             scan.nextLine();

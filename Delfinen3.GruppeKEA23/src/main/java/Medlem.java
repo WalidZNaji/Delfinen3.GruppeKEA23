@@ -13,7 +13,6 @@ public class Medlem {
         this.medlemID = meldlemID;
         this.konkurrenceSvømmer = konkurrenceSvømmer;
         this.aktiv = aktiv;
-
     }
 
     public String getName() {

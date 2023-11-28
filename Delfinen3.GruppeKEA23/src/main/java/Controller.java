@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Controller {
     private final Database database;
     private  final Kasserer kasserer;
-    ArrayList<Medlem> newlyMadeMedlemmere = new ArrayList<>();
+
 
     public Controller() {
         this.database = new Database();
@@ -15,12 +15,6 @@ public class Controller {
     }
 
 
-    public void addToNewlyMadeMedlemmere(String name, int age, int medlemID,
-                                         boolean konkurrenceSvømmer,
-                                         boolean aktiv) {
-        newlyMadeMedlemmere.add(new Medlem(name, age, medlemID, konkurrenceSvømmer,aktiv));
-    }
-
     public void addMedlem(String name, int age, int medlemID,
                           boolean konkurrenceSvømmer,
                           boolean aktiv){
@@ -28,8 +22,8 @@ public class Controller {
                 konkurrenceSvømmer,aktiv);
 
     }
-    public void gemTilCSV (ArrayList<Medlem> medlemmere){
-        database.gemMedlemmereTilCSV(medlemmere);
+    public void gemTilCSV (){
+        database.gemMedlemmereTilCSV();
     }
     public ArrayList<Medlem> getMedlemmere() {
         return database.medlemmere;

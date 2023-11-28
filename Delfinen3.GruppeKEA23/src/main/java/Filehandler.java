@@ -8,14 +8,13 @@ import java.util.Scanner;
 public class Filehandler {
 
     PrintStream fileWriter;
-    ArrayList<Medlem> medlemmereICSV = new ArrayList<>();
     File file = new File("Medlemmere.csv");
 
 
 
     public void gemTilCSV(ArrayList<Medlem> medlemmere) {
         try {
-            fileWriter = new PrintStream(new FileOutputStream(file, true));
+            fileWriter = new PrintStream(new FileOutputStream(file));
 
             if(file.length()==0) {
                 fileWriter.println("Name,Age,MedlemID,KonkurrenceSvømmer,Aktiv");
@@ -34,8 +33,9 @@ public class Filehandler {
         }
     }
 
-    public void loadMedlemmereFromCSV() {
+    public ArrayList<Medlem> loadMedlemmereFromCSV() {
 
+        ArrayList<Medlem> medlemmereICSV = new ArrayList<>();
 
         try (Scanner fileReader = new Scanner(file)) {
             if (file.length() == 0) {
@@ -53,6 +53,7 @@ public class Filehandler {
                         Boolean.parseBoolean(attributes[4].trim()));
                 medlemmereICSV.add(medlem);
             }
+            return medlemmereICSV;
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
