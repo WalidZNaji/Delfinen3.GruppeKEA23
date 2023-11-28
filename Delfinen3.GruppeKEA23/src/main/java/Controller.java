@@ -10,8 +10,8 @@ public class Controller {
         this.kasserer = new Kasserer(this);
     }
 
-    public void udregnIndkomst(){
-        kasserer.generateIncomeOverview();
+    public double udregnIndkomst(){
+       return kasserer.generateIncomeOverview();
     }
 
 

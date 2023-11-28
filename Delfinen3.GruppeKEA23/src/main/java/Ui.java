@@ -29,17 +29,15 @@ public class Ui {
         while (runAgain) {
             System.out.println("Log ind som:");
             System.out.print("""
-                    1. Formand
-                    2. Træner
-                    3. Kasserer
-                    4. Elev
-                    5. Afslut program
+                   1. Administrativ menu
+                   2. Træner menu
+                   3. Afslut program
                     """);
 
             try {
                 userInput = Integer.parseInt(scan.nextLine());
-                if (userInput < 1 || userInput > 5) {
-                    System.out.println("Ugyldigt input. Indtast et tal mellem 1-5");
+                if (userInput < 1 || userInput > 3) {
+                    System.out.println("Ugyldigt input. Indtast et tal mellem 1-3");
                 } else {
                     switch (userInput) {
                         case 1 -> {
@@ -49,7 +47,7 @@ public class Ui {
                             // træner
 
                         }
-                        case 5 -> {
+                        case 3 -> {
                             System.out.println("Programmet er lukket.");
                             runAgain = false;
                             controller.gemTilCSV(controller.newlyMadeMedlemmere);
@@ -59,7 +57,7 @@ public class Ui {
                     }
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Ugyldigt input. Indtast et tal mellem 1-5");
+                System.out.println("Ugyldigt input. Indtast et tal mellem 1-3");
             }
         }
     }
@@ -72,6 +70,7 @@ public class Ui {
             System.out.print("""
                     1. Opret medlem
                     2. Vis medlemsoversigt
+                    3. Vis kontigent oversigt
                     5. Tilbage til hovedmenu
                     """);
             try {
@@ -96,7 +95,7 @@ public class Ui {
                     }
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Ugyldigt input. Indtast et tal mellem 1-5");
+                System.out.println("Ugyldigt input. Indtast et tal mellem 1-4");
             }
 
         }
