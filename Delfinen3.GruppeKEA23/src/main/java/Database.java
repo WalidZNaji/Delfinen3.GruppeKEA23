@@ -5,6 +5,10 @@ public class Database {
 
     ArrayList<Medlem> medlemmere;
 
+    public Database() {
+        this.medlemmere = new ArrayList<>();
+    }
+
     public void addMedlem(String name, int age, int medlemID, boolean konkurrenceSvømmer,
                           boolean aktiv) {
 

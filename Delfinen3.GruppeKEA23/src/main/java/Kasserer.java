@@ -1,6 +1,6 @@
 public class Kasserer {
 
-    private Controller controller;
+    private final Controller controller;
 
     public Kasserer(Controller controller) {
         this.controller = controller;
