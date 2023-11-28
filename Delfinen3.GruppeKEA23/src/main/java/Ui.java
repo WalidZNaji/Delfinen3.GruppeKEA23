@@ -71,7 +71,7 @@ public class Ui {
                     1. Opret medlem
                     2. Vis medlemsoversigt
                     3. Vis kontigent oversigt
-                    5. Tilbage til hovedmenu
+                    4. Tilbage til hovedmenu
                     """);
             try {
                 userInput = Integer.parseInt(scan.nextLine());
