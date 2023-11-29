@@ -192,6 +192,9 @@ public class Ui {
                 scan.nextLine();
             }
 
+
+        }
+
     }
 
     public void setResultat() {

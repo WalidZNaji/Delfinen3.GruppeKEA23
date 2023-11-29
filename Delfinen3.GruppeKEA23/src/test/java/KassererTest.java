@@ -30,15 +30,15 @@ class KassererTest {
     @Test
     void generateIncomeOverviewSeniorTest() {
         premadeMedlemmereSenior();
-        double expected = controller.udregnIndkomst();
-        double actual = 4800.0; // 1600 * 3
+        double expected = 4800.0; // 1600 * 3
+        double actual = controller.udregnIndkomst();
         assertEquals(expected, actual, 0.1);
     }
     @Test
     void generateIncomeOverviewPassivTest() {
         premadeMedlemmerePassiv();
-        double expected = controller.udregnIndkomst();
-        double actual = 1500.0; // 500 * 3
+        double expected = 1500.0; // 500 * 3
+        double actual = controller.udregnIndkomst();
         assertEquals(expected, actual, 0.1);
     }
 

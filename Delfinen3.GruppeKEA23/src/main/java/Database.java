@@ -8,6 +8,7 @@ public class Database {
 
     public Database() {
         this.medlemmere = new ArrayList<>();
+        this.konkurrenceSvømmereResultater = new ArrayList<>();
     }
     public void addResultat(String name, int age, int medlemID, boolean konkurrenceSvømmer,
                             boolean aktiv, String disciplin, double tid){

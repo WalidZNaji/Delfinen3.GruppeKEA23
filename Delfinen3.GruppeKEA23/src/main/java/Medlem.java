@@ -15,6 +15,8 @@ public class Medlem {
         this.aktiv = aktiv;
     }
 
+
+
     public String getName() {
         return name;
     }
