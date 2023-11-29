@@ -31,7 +31,16 @@ public class Controller {
 
     public void loadMedlemmereFraCSV () {
          database.loadMedlemmereFromCSV();
-
+    }
+    public ArrayList<Medlem> findMedlemByName(String medlemsNavn) {
+        return database.findMedlemByName(medlemsNavn);
+    }
+    public void addResultat(String name, int age, int medlemID, boolean konkurrenceSvømmer,
+                            boolean aktiv, String disciplin, Double tid){
+        database.addResultat(name, age, medlemID, konkurrenceSvømmer,aktiv, disciplin, tid);
+    }
+    public ArrayList<Medlem> getResultater() {
+        return database.getResultater();
     }
 
 }

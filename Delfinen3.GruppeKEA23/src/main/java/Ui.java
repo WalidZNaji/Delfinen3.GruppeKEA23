@@ -29,10 +29,10 @@ public class Ui {
         while (runAgain) {
             System.out.println("Log ind som:");
             System.out.print("""
-                   1. Administrativ menu
-                   2. Træner menu
-                   3. Afslut program
-                    """);
+                    1. Administrativ menu
+                    2. Træner menu
+                    3. Afslut program
+                     """);
 
             try {
                 userInput = Integer.parseInt(scan.nextLine());
@@ -44,8 +44,7 @@ public class Ui {
                             administrativ();
                         }
                         case 2 -> {
-                            // træner
-
+                            trænerMenu();
                         }
                         case 3 -> {
                             System.out.println("Programmet er lukket.");
@@ -101,6 +100,32 @@ public class Ui {
         }
     }
 
+    public void trænerMenu() {
+        boolean runAgain = true;
+        int userInput;
+
+        while (runAgain) {
+            System.out.print("""
+                    1. Indtast resultat.
+                    """);
+            try {
+                userInput = Integer.parseInt(scan.nextLine());
+                if (userInput < 1 || userInput > 4) {
+                    System.out.println("Ugyldigt input. Indtast et tal mellem 1-4");
+                } else {
+                    switch (userInput) {
+                        case 1 -> {
+                            setResultat();
+                        }
+                    }
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Ugyldigt input. Indtast et tal mellem 1-4");
+            }
+        }
+    }
+
+
     public void createMedlem() {
 
         try {
@@ -134,7 +159,7 @@ public class Ui {
 
     public void medlemsOversigt() {
         ArrayList<Medlem> listeFraCSV = controller.getMedlemmere();
-        for (Medlem m:listeFraCSV) {
+        for (Medlem m : listeFraCSV) {
             System.out.println(m);
         }
     }
@@ -150,6 +175,7 @@ public class Ui {
             }
         }
     }
+
     public boolean getBooleanInput() {
         while (true) {
             try {
@@ -157,18 +183,82 @@ public class Ui {
                 if (input.equalsIgnoreCase("y")) {
                     return true;
                 } else if (input.equalsIgnoreCase("n")) {
-                        return false;
-                    } else {
+                    return false;
+                } else {
                     System.out.println("Ugyldig indtastning. Indtast 'y' eller 'n'. Prøv igen.");
                 }
-                } catch (InputMismatchException e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Ugyldig indtastning. Indtast 'y' eller 'n'. Prøv igen.");
                 scan.nextLine();
             }
 
-        }
     }
 
+    public void setResultat() {
+        System.out.println("Indtast medlemmets navn");
+        String brugerinput = scan.nextLine();
+
+        //find personer
+        ArrayList<Medlem> søgeresultat = controller.findMedlemByName(brugerinput);
+        Medlem medlemToEdit = null;
+
+        //Søgningen finder ingen personer
+        if (søgeresultat.isEmpty()) {
+            System.out.println("Der er ingen medlemmer, hvis navn stemmer overens med det indtastede. ");
+        } else  {
+            // Vælg en person i søgeresultat med flere personer
+            System.out.println("Vælg medlem");
+            int tæller = 1;
+            for (Medlem medlem : søgeresultat) {
+                System.out.println(tæller++ + ". " +
+                        medlem.getName() + ", " +
+                        medlem.getAge() + ", " +
+                        medlem.getMedlemID() + ", " +
+                        medlem.isKonkurrenceSvømmer() + ", " +
+                        medlem.isAktiv() + ", ");
+
+            }
+            int medlemPick = 0;
+            while (true) {
+                try {
+                    medlemPick = scan.nextInt();
+                    scan.nextLine(); // Håndterer Scanner Bug
+                    if (medlemPick > 0 && medlemPick <= søgeresultat.size()) {
+                        medlemToEdit = søgeresultat.get(medlemPick - 1);
+                        break;
+                    } else {
+                        System.out.print("Tal ikke inde for rækkevidde. Prøv igen: ");
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.print("Ugyldigt input. Indtast et tal fx. '1': ");
+                    scan.nextLine();
+
+                }
+            }
+
+
+        }
+                //redigering af valgte person
+        if(medlemToEdit !=null){
+        System.out.println("Indtast " + medlemToEdit.getName() + "s " + "disciplin");
+        String disciplin = scan.nextLine();
+
+
+        System.out.println("Indtast " +  medlemToEdit.getName() + "s " + "bedste tid");
+        double tid = scan.nextDouble();
+        scan.nextLine();
+
+            System.out.println("Ændring: " + medlemToEdit.getName() + ", disciplin: " + disciplin +
+                    ", tid: " + tid);
+            controller.addResultat(medlemToEdit.getName(), medlemToEdit.getAge(), medlemToEdit.getMedlemID(),
+                medlemToEdit.isKonkurrenceSvømmer(), medlemToEdit.isAktiv(), disciplin, tid);
+            for (Medlem m:controller.getResultater()) {
+                System.out.println(m);
+            }
+
+
+    }
+}
 }
 
 
