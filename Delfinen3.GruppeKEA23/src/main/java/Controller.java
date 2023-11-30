@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
     private final Database database;
@@ -53,6 +54,10 @@ public class Controller {
     public ArrayList<Resultat> getResultater() {
         return database.getResultater();
     }
+    public List<Resultat> top5Crawl() {
+        return database.top5Crawl();
+    }
+
     public void setCrawlTid(double nyCrawlTid) {
         database.setCrawlTid(nyCrawlTid);
     }

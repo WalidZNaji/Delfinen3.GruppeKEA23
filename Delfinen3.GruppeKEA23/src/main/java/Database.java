@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Database {
     Filehandler filehandler = new Filehandler();
@@ -61,6 +63,24 @@ public class Database {
         }
         return lokalListe;
     }
+
+    public List<Resultat> top5Crawl() {
+
+        List<Resultat> crawlResultater = new ArrayList<>(konkurrenceSvømmereResultater);
+
+        Collections.sort(crawlResultater, new CrawlComparator());
+        int størsteStørrelse = Math.min(5, konkurrenceSvømmereResultater.size());
+        List<Resultat> top5CrawlResultater = crawlResultater.subList(0, størsteStørrelse);
+
+        for (Resultat resultat : top5CrawlResultater) {
+            System.out.println("Svømmer " + resultat.getName() + "Crawltid" + resultat.getCrawlTid());
+
+        }
+        return top5CrawlResultater;
+    }
+
+
+
     public void setCrawlTid(double nyCrawlTid) {
         resultat.setCrawlTid(nyCrawlTid);
     }
