@@ -6,9 +6,16 @@ public class Resultat extends Medlem {
     private double rygCrawlTid;
 
     public Resultat() {
-
     }
-    public Resultat(String name, int age, int meldlemID, boolean konkurrenceSvømmer, boolean aktiv,
+        public String getAgeCategory() {
+            if (getAge() < 18) {
+                return "Junior";
+            } else {
+                return "Senior";
+            }
+        }
+
+        public Resultat(String name, int age, int meldlemID, boolean konkurrenceSvømmer, boolean aktiv,
                     double crawlTid, double brystTid, double butterflyTid, double rygCrawlTid) {
         super(name, age, meldlemID, konkurrenceSvømmer, aktiv);
         this.crawlTid = crawlTid;

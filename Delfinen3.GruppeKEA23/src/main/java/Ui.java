@@ -1,7 +1,5 @@
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 public class Ui {
     private final Scanner scan;
@@ -111,7 +109,8 @@ public class Ui {
             System.out.print("""
                     1. Indtast resultat.
                     2. Vis resultater oversigt.
-                    3. Tilbage til hovedmenu.
+                    3. vis resultater over top 5
+                    4. Tilbage til hovedmenu.
                     """);
             try {
                 userInput = Integer.parseInt(scan.nextLine());
@@ -121,7 +120,8 @@ public class Ui {
                     switch (userInput) {
                         case 1 -> editResultat();
                         case 2 -> visResultater();
-                        case 3 -> runAgain = false;
+                        case 3 -> top5Swimmers();
+                        case 4 -> runAgain = false;
                     }
                 }
             } catch (NumberFormatException e) {
@@ -317,20 +317,90 @@ public class Ui {
 
         scan.nextLine(); // Consume the newline character
     }
+
     public void listeAfDiscipliner() {
         System.out.println("""
-                    1. Crawl
-                    2. BrystSvømning
-                    3. Butterfly
-                    4. Rygcrawl
-                    """);
-        }
+                1. Crawl
+                2. BrystSvømning
+                3. Butterfly
+                4. Rygcrawl
+                """);
+    }
+
     public void visResultater() {
         ArrayList<Resultat> resultaterFraCSV = controller.getResultater();
-            for (Resultat r:resultaterFraCSV) {
-                System.out.println(r);
+        for (Resultat r : resultaterFraCSV) {
+            System.out.println(r);
+        }
+    }
+
+    public void top5Swimmers() {
+        System.out.println("Top 5 Svømmere:");
+
+        for (String discipline : new String[]{"Crawl", "BrystSvømning", "Butterfly", "Rygcrawl"}) {
+            System.out.println("Disciplin: " + discipline);
+
+            ArrayList<Resultat> topJunior = findTopSwimmers(discipline, "Junior");
+            ArrayList<Resultat> topSenior = findTopSwimmers(discipline, "Senior");
+
+            System.out.println("Top 5 Junior Svømmere:");
+            displaySwimmers(topJunior);
+
+            System.out.println("Top 5 Senior Svømmere:");
+            displaySwimmers(topSenior);
+        }
+    }
+
+    private ArrayList<Resultat> findTopSwimmers(String discipline, String ageCategory) {
+        ArrayList<Resultat> allResults = controller.getResultater();
+        ArrayList<Resultat> topSwimmers = new ArrayList<>();
+
+        // Filtrer resultat baseret på alder og disciplin
+        for (Resultat result : allResults) {
+            if (result.getAgeCategory().equals(ageCategory)) {
+                double time = switch (discipline) {
+                    case "Crawl" -> result.getCrawlTid();
+                    case "BrystSvømning" -> result.getBrystTid();
+                    case "Butterfly" -> result.getButterflyTid();
+                    case "Rygcrawl" -> result.getRygCrawlTid();
+                    default -> throw new IllegalArgumentException("Ugyldig disciplin");
+                };
+
+                if (time >= 0) {
+                    topSwimmers.add(result);
+                }
             }
         }
+
+        // Sorter top svømmere baseret på tid
+        topSwimmers.sort(Comparator.comparingDouble(result -> {
+            switch (discipline) {
+                case "Crawl" -> {
+                    return result.getCrawlTid();
+                }
+                case "BrystSvømning" -> {
+                    return result.getBrystTid();
+                }
+                case "Butterfly" -> {
+                    return result.getButterflyTid();
+                }
+                case "Rygcrawl" -> {
+                    return result.getRygCrawlTid();
+                }
+                default -> throw new IllegalArgumentException("Ugyldig disciplin");
+            }
+        }));
+
+        // Behold kun top 5
+        return new ArrayList<>(topSwimmers.subList(0, Math.min(5, topSwimmers.size())));
+    }
+
+    private void displaySwimmers(ArrayList<Resultat> swimmers) {
+        for (Resultat swimmer : swimmers) {
+            System.out.println(swimmer);
+        }
+        System.out.println();  // skille linje mellem disciplinerne
+    }
 
 }
 
