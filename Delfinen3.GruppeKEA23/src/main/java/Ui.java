@@ -107,6 +107,7 @@ public class Ui {
         while (runAgain) {
             System.out.print("""
                     1. Indtast resultat.
+                    2. Vis oversigt.
                     """);
             try {
                 userInput = Integer.parseInt(scan.nextLine());
@@ -114,9 +115,8 @@ public class Ui {
                     System.out.println("Ugyldigt input. Indtast et tal mellem 1-4");
                 } else {
                     switch (userInput) {
-                        case 1 -> {
-                            setResultat();
-                        }
+                        case 1 -> editResultat();
+                        case 2 -> visResultater();
                     }
                 }
             } catch (NumberFormatException e) {
@@ -197,7 +197,7 @@ public class Ui {
 
     }
 
-    public void setResultat() {
+    public void editResultat() {
         System.out.println("Indtast medlemmets navn");
         String brugerinput = scan.nextLine();
 
@@ -243,25 +243,63 @@ public class Ui {
         }
                 //redigering af valgte person
         if(medlemToEdit !=null){
-        System.out.println("Indtast " + medlemToEdit.getName() + "s " + "disciplin");
-        String disciplin = scan.nextLine();
+            System.out.println("Vælg disciplin:");
+        listeAfDiscipliner();
+        System.out.print("Indtast tal: ");
+        int dicsiplinInput = scan.nextInt();
+        double crawlTid = 0.0;
+        double brystTid = 0.0;
+        double butterflyTid = 0.0;
+        double rygCrawlTid = 0.0;
 
-
-        System.out.println("Indtast " +  medlemToEdit.getName() + "s " + "bedste tid");
-        double tid = scan.nextDouble();
-        scan.nextLine();
-
-            System.out.println("Ændring: " + medlemToEdit.getName() + ", disciplin: " + disciplin +
-                    ", tid: " + tid);
+        switch (dicsiplinInput){
+            case 1 -> {
+                System.out.println("Indtast crawl tid: ");
+                crawlTid = scan.nextDouble();
+                controller.setCrawlTid(crawlTid);
+                System.out.println(medlemToEdit.getName() + "s crawl tid er nu " + crawlTid);
+            }
+            case 2 -> {
+                System.out.println("Indtast brystsvømnings tid: ");
+                brystTid = scan.nextDouble();
+                controller.setBrystTid(brystTid);
+                System.out.println(medlemToEdit.getName() + "s brystsvømnings tid er nu " + brystTid);
+            }
+            case 3 -> {
+                System.out.println("Indtast butterfly tid: ");
+                butterflyTid = scan.nextDouble();
+                controller.setButterflyTid(butterflyTid);
+                System.out.println(medlemToEdit.getName() + "s butterfly tid er nu " + butterflyTid);
+            }
+            case 4 -> {
+                System.out.println("Indtast rygcrawl tid: ");
+                rygCrawlTid = scan.nextDouble();
+                controller.setRygCrawlTid(rygCrawlTid);
+                System.out.println(medlemToEdit.getName() + "s rygcrawl  tid er nu " + rygCrawlTid);
+            }
+        }
             controller.addResultat(medlemToEdit.getName(), medlemToEdit.getAge(), medlemToEdit.getMedlemID(),
-                medlemToEdit.isKonkurrenceSvømmer(), medlemToEdit.isAktiv(), disciplin, tid);
+                    medlemToEdit.isKonkurrenceSvømmer(), medlemToEdit.isAktiv(), crawlTid, brystTid, butterflyTid, rygCrawlTid);
+
+        }
+            scan.nextLine();
+
+        }
+    public void listeAfDiscipliner() {
+        System.out.println("""
+                    1. Crawl
+                    2. BrystSvømning
+                    3. Butterfly
+                    4. Rygcrawl
+                    """);
+        }
+    public void visResultater() {
+        if (!controller.getResultater().isEmpty()){
             for (Medlem m:controller.getResultater()) {
                 System.out.println(m);
-            }
-
-
-    }
-}
+                }
+            } else System.out.println("Ingen resultater at vise");
+        }
 }
 
 

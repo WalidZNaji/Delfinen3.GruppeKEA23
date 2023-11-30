@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Database {
     Filehandler filehandler = new Filehandler();
+    Resultat resultat = new Resultat();
 
     ArrayList<Medlem> medlemmere;
     ArrayList<Medlem> konkurrenceSvømmereResultater;
@@ -11,10 +12,9 @@ public class Database {
         this.konkurrenceSvømmereResultater = new ArrayList<>();
     }
     public void addResultat(String name, int age, int medlemID, boolean konkurrenceSvømmer,
-                            boolean aktiv, String disciplin, double tid){
+                            boolean aktiv, double crawlTid, double brystTid, double butterflyTid, double rygCrawlTid){
 
-        konkurrenceSvømmereResultater.add(new Resultat(name, age, medlemID, konkurrenceSvømmer,aktiv,
-                disciplin, tid));
+        konkurrenceSvømmereResultater.add(new Resultat(name, age, medlemID, konkurrenceSvømmer,aktiv, crawlTid, brystTid, butterflyTid, rygCrawlTid));
     }
 
 
@@ -45,6 +45,20 @@ public class Database {
 
         }
         return lokalMedlemmere;
+    }
+    public void setCrawlTid(double nyCrawlTid) {
+        resultat.setCrawlTid(nyCrawlTid);
+    }
+    public void setBrystTid(double nyBrystTid) {
+        resultat.setBrystTid(nyBrystTid);
+    }
+
+    public void setButterflyTid(double nyButterflyTid) {
+        resultat.setButterflyTid(nyButterflyTid);
+    }
+
+    public void setRygCrawlTid(double nyRygCrawlTid) {
+        resultat.setRygCrawlTid(nyRygCrawlTid);
     }
 
 }

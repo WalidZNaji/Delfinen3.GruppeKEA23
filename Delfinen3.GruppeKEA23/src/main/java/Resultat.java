@@ -1,33 +1,48 @@
 public class Resultat extends Medlem {
 
-    private Medlem medlem;
+    private double crawlTid;
+    private double brystTid;
+    private double butterflyTid;
+    private double rygCrawlTid;
 
-    private String disciplin;
+    public Resultat() {
 
-    private double tid;
-
+    }
     public Resultat(String name, int age, int meldlemID, boolean konkurrenceSvømmer, boolean aktiv,
-                    String disciplin, double tid) {
+                    double crawlTid, double brystTid, double butterflyTid, double rygCrawlTid) {
         super(name, age, meldlemID, konkurrenceSvømmer, aktiv);
-        this.disciplin = disciplin;
-        this.tid = tid;
+        this.crawlTid = crawlTid;
+        this.brystTid = brystTid;
+        this.butterflyTid = butterflyTid;
+        this.rygCrawlTid = rygCrawlTid;
     }
 
 
-    public void setDisciplin(String disciplin) {
-        this.disciplin = disciplin;
+   public void setCrawlTid(double nyCrawlTid) {
+        this.crawlTid = nyCrawlTid;
+   }
+   public void setBrystTid(double nyBrystTid) {
+        this.brystTid = nyBrystTid;
+   }
+
+    public void setButterflyTid(double nyButterflyTid) {
+        this.butterflyTid = nyButterflyTid;
     }
 
-    public void setTid(double tid) {
-        this.tid = tid;
+    public void setRygCrawlTid(double nyRygCrawlTid) {
+        this.rygCrawlTid = nyRygCrawlTid;
     }
+
     @Override
     public String toString() {
         return "\n" + "Navn: " + Resultat.super.getName() + "\n"  +
                 "Alder: " + Resultat.super.getAge() + "\n"  +
                 "Medlemsid: " + Resultat.super.getMedlemID() + "\n"  +
-                "Disciplin: " + disciplin + "\n" +
-                "Tid: " + tid +  "\n" +
+                "Crawl: " + crawlTid + "\n" +
+                "Brystsvømning: " + brystTid + "\n" +
+                "Butterfly: " + butterflyTid + "\n" +
+                "Rygcrawl: " + rygCrawlTid + "\n" +
                 "\u2500".repeat(50);
     }
+
 }

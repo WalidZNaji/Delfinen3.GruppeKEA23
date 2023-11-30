@@ -36,11 +36,25 @@ public class Controller {
         return database.findMedlemByName(medlemsNavn);
     }
     public void addResultat(String name, int age, int medlemID, boolean konkurrenceSvømmer,
-                            boolean aktiv, String disciplin, Double tid){
-        database.addResultat(name, age, medlemID, konkurrenceSvømmer,aktiv, disciplin, tid);
+                            boolean aktiv,double crawlTid, double brystTid, double butterflyTid, double rygCrawlTid){
+        database.addResultat(name, age, medlemID, konkurrenceSvømmer,aktiv, crawlTid, brystTid, butterflyTid, rygCrawlTid);
     }
     public ArrayList<Medlem> getResultater() {
         return database.getResultater();
+    }
+    public void setCrawlTid(double nyCrawlTid) {
+        database.setCrawlTid(nyCrawlTid);
+    }
+    public void setBrystTid(double nyBrystTid) {
+        database.setBrystTid(nyBrystTid);
+    }
+
+    public void setButterflyTid(double nyButterflyTid) {
+        database.setButterflyTid(nyButterflyTid);
+    }
+
+    public void setRygCrawlTid(double nyRygCrawlTid) {
+        database.setRygCrawlTid(nyRygCrawlTid);
     }
 
 }

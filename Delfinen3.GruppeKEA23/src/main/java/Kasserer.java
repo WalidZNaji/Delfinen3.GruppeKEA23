@@ -5,7 +5,7 @@ public class Kasserer {
     public Kasserer(Controller controller) {
         this.controller = controller;
     }
-    public double generateIncomeOverview() {
+    public double generateIncomeOverview() { // Tested
             double totalIndkomst = 0.0;
 
 

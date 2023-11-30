@@ -5,7 +5,9 @@ public class Medlem {
     private boolean konkurrenceSvømmer; // hvis false = motionist;
     private boolean aktiv; // Hvis false = passiv.
 
+public Medlem() {
 
+}
     public Medlem(String name, int age, int meldlemID, boolean konkurrenceSvømmer,
                   boolean aktiv) {
         this.name = name;
