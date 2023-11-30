@@ -25,6 +25,9 @@ public class Controller {
     public void gemTilCSV (){
         database.gemMedlemmereTilCSV();
     }
+    public void gemResultaterTilCSV(){
+        database.gemResultaterTilCSV();
+    }
     public ArrayList<Medlem> getMedlemmere() {
         return database.medlemmere;
     }
@@ -47,7 +50,7 @@ public class Controller {
                             boolean aktiv,double crawlTid, double brystTid, double butterflyTid, double rygCrawlTid){
         database.addResultat(name, age, medlemID, konkurrenceSvømmer,aktiv, crawlTid, brystTid, butterflyTid, rygCrawlTid);
     }
-    public ArrayList<Medlem> getResultater() {
+    public ArrayList<Resultat> getResultater() {
         return database.getResultater();
     }
     public void setCrawlTid(double nyCrawlTid) {

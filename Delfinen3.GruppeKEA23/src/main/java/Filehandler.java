@@ -9,8 +9,7 @@ public class Filehandler {
 
     PrintStream fileWriter;
     File file = new File("Medlemmere.csv");
-
-
+    File file2 = new File("Resultater.csv");
 
     public void gemTilCSV(ArrayList<Medlem> medlemmere) {
         try {
@@ -58,5 +57,53 @@ public class Filehandler {
             throw new RuntimeException(e);
         }
     }
+    public void gemResultaterTilCSV(ArrayList<Resultat> resultater) {
+        try {
+            fileWriter = new PrintStream(new FileOutputStream(file2));
 
+            if(file2.length()==0) {
+                fileWriter.println("Name,Age,MedlemID,KonkurrenceSvømmer,Aktiv,Crawltid,Brysttid,Butterflytid,Rygcrawltid");
+            }
+            for (Resultat resultat : resultater) {
+                String linje = resultat.getName() + "," +
+                        resultat.getAge() + "," +
+                        resultat.getMedlemID() + "," +
+                        resultat.isKonkurrenceSvømmer() + "," +
+                        resultat.isAktiv() + "," +
+                        resultat.getCrawlTid() + "," +
+                        resultat.getBrystTid() + "," +
+                        resultat.getButterflyTid() + "," +
+                        resultat.getRygCrawlTid();
+                fileWriter.println(linje);
+            }
+            fileWriter.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public ArrayList<Resultat> loadResultaterFraCSV() {
+
+        ArrayList<Resultat> resultaterICSV = new ArrayList<>();
+
+        try (Scanner fileReader = new Scanner(file2)) {
+            if (file.length() == 0) {
+            }
+            // Skipping the header
+            fileReader.nextLine();
+
+            while (fileReader.hasNext()) {
+                String linje = fileReader.nextLine();
+                String[] attributes = linje.split(",");
+                Resultat resultat = new Resultat(attributes[0].trim(), Integer.parseInt(attributes[1].trim()),
+                        Integer.parseInt(attributes[2].trim()), Boolean.parseBoolean(attributes[3].trim()),
+                        Boolean.parseBoolean(attributes[4].trim()), Double.parseDouble(attributes[5].trim()),
+                        Double.parseDouble(attributes[6].trim()), Double.parseDouble(attributes[7].trim()),
+                        Double.parseDouble(attributes[8].trim()));
+                resultaterICSV.add(resultat);
+            }
+            return resultaterICSV;
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -5,7 +5,7 @@ public class Database {
     Resultat resultat = new Resultat();
 
     ArrayList<Medlem> medlemmere;
-    ArrayList<Medlem> konkurrenceSvømmereResultater;
+    ArrayList<Resultat> konkurrenceSvømmereResultater;
 
     public Database() {
         this.medlemmere = new ArrayList<>();
@@ -18,7 +18,7 @@ public class Database {
     }
 
 
-    public ArrayList<Medlem> getResultater() {
+    public ArrayList<Resultat> getResultater() {
         return konkurrenceSvømmereResultater;
     }
 
@@ -30,6 +30,9 @@ public class Database {
 
     public void gemMedlemmereTilCSV(){
         filehandler.gemTilCSV(medlemmere);
+    }
+    public void gemResultaterTilCSV(){
+        filehandler.gemResultaterTilCSV(konkurrenceSvømmereResultater);
     }
 
     public void loadMedlemmereFromCSV() {

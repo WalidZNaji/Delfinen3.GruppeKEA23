@@ -15,6 +15,7 @@ public class Ui {
 
     public void startProgram() {
         controller.loadMedlemmereFraCSV();
+        controller.loadResultatFraCSV();
         startMessage();
         startMenu();
     }
@@ -51,6 +52,7 @@ public class Ui {
                             System.out.println("Programmet er lukket.");
                             runAgain = false;
                             controller.gemTilCSV();
+                            controller.gemResultaterTilCSV();
 
                         }
 
@@ -210,7 +212,7 @@ public class Ui {
         //Søgningen finder ingen personer
         if (søgeresultat.isEmpty()) {
             System.out.println("Der er ingen medlemmer, hvis navn stemmer overens med det indtastede. ");
-        } else  {
+        } else {
             // Vælg en person i søgeresultat med flere personer
             System.out.println("Vælg medlem");
             int tæller = 1;
@@ -240,7 +242,6 @@ public class Ui {
 
                 }
             }
-
 
         }
 
