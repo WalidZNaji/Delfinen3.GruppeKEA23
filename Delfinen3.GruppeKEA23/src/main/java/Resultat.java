@@ -33,6 +33,27 @@ public class Resultat extends Medlem {
         this.rygCrawlTid = nyRygCrawlTid;
     }
 
+    public double getCrawlTid() {
+        return crawlTid;
+    }
+
+    public double getBrystTid() {
+        return brystTid;
+    }
+
+    public double getButterflyTid() {
+        return butterflyTid;
+    }
+
+    public double getRygCrawlTid() {
+        return rygCrawlTid;
+    }
+
+    @Override
+    public int getMedlemID() {
+        return super.getMedlemID();
+    }
+
     @Override
     public String toString() {
         return "\n" + "Navn: " + Resultat.super.getName() + "\n"  +

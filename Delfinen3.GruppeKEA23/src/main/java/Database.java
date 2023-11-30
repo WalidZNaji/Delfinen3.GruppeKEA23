@@ -35,6 +35,9 @@ public class Database {
     public void loadMedlemmereFromCSV() {
         medlemmere = filehandler.loadMedlemmereFromCSV();
     }
+    public void loadResultatFraCSV() {
+        konkurrenceSvømmereResultater = filehandler.loadResultaterFraCSV();
+    }
     public ArrayList<Medlem> findMedlemByName(String medlemsNavn) {
         ArrayList<Medlem> lokalMedlemmere = new ArrayList<>();
 
@@ -45,6 +48,15 @@ public class Database {
 
         }
         return lokalMedlemmere;
+    }
+    public ArrayList<Resultat> findResultatObjectByMedlemID(int medlemsID) {
+        ArrayList<Resultat> lokalListe = new ArrayList<>();
+        for (Resultat r : konkurrenceSvømmereResultater) {
+            if (r.getMedlemID() == medlemsID) {
+                lokalListe.add(r);
+            }
+        }
+        return lokalListe;
     }
     public void setCrawlTid(double nyCrawlTid) {
         resultat.setCrawlTid(nyCrawlTid);

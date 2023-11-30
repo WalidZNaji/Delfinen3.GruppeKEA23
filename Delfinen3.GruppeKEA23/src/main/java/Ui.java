@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -107,7 +108,8 @@ public class Ui {
         while (runAgain) {
             System.out.print("""
                     1. Indtast resultat.
-                    2. Vis oversigt.
+                    2. Vis resultater oversigt.
+                    3. Tilbage til hovedmenu.
                     """);
             try {
                 userInput = Integer.parseInt(scan.nextLine());
@@ -117,6 +119,7 @@ public class Ui {
                     switch (userInput) {
                         case 1 -> editResultat();
                         case 2 -> visResultater();
+                        case 3 -> runAgain = false;
                     }
                 }
             } catch (NumberFormatException e) {
@@ -154,7 +157,6 @@ public class Ui {
             System.out.println("Ugyldig indtastning. Prøv igen.");
             scan.nextLine();
         }
-
     }
 
     public void medlemsOversigt() {
@@ -241,50 +243,79 @@ public class Ui {
 
 
         }
-                //redigering af valgte person
-        if(medlemToEdit !=null){
+
+        if (medlemToEdit != null) {
             System.out.println("Vælg disciplin:");
-        listeAfDiscipliner();
-        System.out.print("Indtast tal: ");
-        int dicsiplinInput = scan.nextInt();
-        double crawlTid = 0.0;
-        double brystTid = 0.0;
-        double butterflyTid = 0.0;
-        double rygCrawlTid = 0.0;
+            listeAfDiscipliner();
+            System.out.print("Indtast tal: ");
+            int disciplinInput = scan.nextInt();
 
-        switch (dicsiplinInput){
-            case 1 -> {
-                System.out.println("Indtast crawl tid: ");
-                crawlTid = scan.nextDouble();
-                controller.setCrawlTid(crawlTid);
-                System.out.println(medlemToEdit.getName() + "s crawl tid er nu " + crawlTid);
+
+            double crawlTid = 0.0;
+            double brystTid = 0.0;
+            double butterflyTid = 0.0;
+            double rygCrawlTid = 0.0;
+
+            ArrayList<Resultat> existingResultat =
+                    controller.findResultatObjectByMedlemID(medlemToEdit.getMedlemID());
+
+            if (!existingResultat.isEmpty()) {
+                Resultat existingResult = existingResultat.get(0);
+                crawlTid = existingResult.getCrawlTid();
+                brystTid = existingResult.getBrystTid();
+                butterflyTid = existingResult.getButterflyTid();
+                rygCrawlTid = existingResult.getRygCrawlTid();
             }
-            case 2 -> {
-                System.out.println("Indtast brystsvømnings tid: ");
-                brystTid = scan.nextDouble();
-                controller.setBrystTid(brystTid);
-                System.out.println(medlemToEdit.getName() + "s brystsvømnings tid er nu " + brystTid);
+
+            switch (disciplinInput) {
+                case 1 -> {
+                    System.out.println("Indtast crawl tid: ");
+                    crawlTid = scan.nextDouble();
+                }
+                case 2 -> {
+                    System.out.println("Indtast brystsvømnings tid: ");
+                    brystTid = scan.nextDouble();
+                }
+                case 3 -> {
+                    System.out.println("Indtast butterfly tid: ");
+                    butterflyTid = scan.nextDouble();
+                }
+                case 4 -> {
+                    System.out.println("Indtast rygcrawl tid: ");
+                    rygCrawlTid = scan.nextDouble();
+                }
             }
-            case 3 -> {
-                System.out.println("Indtast butterfly tid: ");
-                butterflyTid = scan.nextDouble();
-                controller.setButterflyTid(butterflyTid);
-                System.out.println(medlemToEdit.getName() + "s butterfly tid er nu " + butterflyTid);
-            }
-            case 4 -> {
-                System.out.println("Indtast rygcrawl tid: ");
-                rygCrawlTid = scan.nextDouble();
-                controller.setRygCrawlTid(rygCrawlTid);
-                System.out.println(medlemToEdit.getName() + "s rygcrawl  tid er nu " + rygCrawlTid);
+
+
+            if (!existingResultat.isEmpty()) {
+                Resultat existingResult = existingResultat.get(0);
+
+                if (crawlTid > 0) existingResult.setCrawlTid(crawlTid);
+                if (brystTid > 0) existingResult.setBrystTid(brystTid);
+                if (butterflyTid > 0) existingResult.setButterflyTid(butterflyTid);
+                if (rygCrawlTid > 0) existingResult.setRygCrawlTid(rygCrawlTid);
+
+                System.out.println(medlemToEdit.getName() + "'s resultat er blevet opdateret.");
+            } else {
+
+                controller.addResultat(
+                        medlemToEdit.getName(),
+                        medlemToEdit.getAge(),
+                        medlemToEdit.getMedlemID(),
+                        medlemToEdit.isKonkurrenceSvømmer(),
+                        medlemToEdit.isAktiv(),
+                        crawlTid,
+                        brystTid,
+                        butterflyTid,
+                        rygCrawlTid
+                );
+
+                System.out.println(medlemToEdit.getName() + "'s resultat er blevet tilføjet.");
             }
         }
-            controller.addResultat(medlemToEdit.getName(), medlemToEdit.getAge(), medlemToEdit.getMedlemID(),
-                    medlemToEdit.isKonkurrenceSvømmer(), medlemToEdit.isAktiv(), crawlTid, brystTid, butterflyTid, rygCrawlTid);
 
-        }
-            scan.nextLine();
-
-        }
+        scan.nextLine(); // Consume the newline character
+    }
     public void listeAfDiscipliner() {
         System.out.println("""
                     1. Crawl
@@ -294,13 +325,16 @@ public class Ui {
                     """);
         }
     public void visResultater() {
-        if (!controller.getResultater().isEmpty()){
-            for (Medlem m:controller.getResultater()) {
-                System.out.println(m);
-                }
-            } else System.out.println("Ingen resultater at vise");
+        ArrayList<Resultat> resultaterFraCSV = controller.getResultater();
+            for (Resultat r:resultaterFraCSV) {
+                System.out.println(r);
+            }
         }
+
 }
+
+
+
 
 
 
