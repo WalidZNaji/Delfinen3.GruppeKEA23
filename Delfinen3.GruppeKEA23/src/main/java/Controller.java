@@ -61,6 +61,7 @@ public class Controller {
         return database.findResultatObjectByMedlemID(medlemsID);
     }
 
+
     public void addResultat(String name, int age, int medlemID, boolean konkurrenceSvømmer,
                             boolean aktiv,double crawlTid, double brystTid, double butterflyTid, double rygCrawlTid){
         database.addResultat(name, age, medlemID, konkurrenceSvømmer,aktiv, crawlTid, brystTid, butterflyTid, rygCrawlTid);
