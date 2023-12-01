@@ -138,8 +138,6 @@ public class Ui {
             String medlemName = scan.nextLine();
             System.out.print("Indtast alder på Medlem: ");
             int medlemAge = getIntegerInput();
-            System.out.print("Indtast medlemsID: ");
-            int medlemID = getIntegerInput();
 
             System.out.print("Konkurrence svømmer? [y/n]: ");
             boolean konkurrenceSvømmerYesNo = getBooleanInput();
@@ -149,7 +147,7 @@ public class Ui {
             boolean aktivYesNo = getBooleanInput();
 
             // Adder til oprindelig.
-            controller.addMedlem(medlemName, medlemAge, medlemID,
+            controller.addMedlem(medlemName, medlemAge,
                     konkurrenceSvømmerYesNo, aktivYesNo);
 
 

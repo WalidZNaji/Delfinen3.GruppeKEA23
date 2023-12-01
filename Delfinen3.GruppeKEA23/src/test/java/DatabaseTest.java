@@ -20,8 +20,8 @@ class DatabaseTest {
         assertEquals(expected, actual, 0.1);
     }
     void premadeMedlemmerePassiv() {
-        controller.addMedlem("Sina", 17, 1, true, false);
-        controller.addMedlem("Jasser", 18, 2, true, false);
-        controller.addMedlem("Yusef", 61, 3, true, false);
+        controller.addMedlem("Sina", 17, true, false);
+        controller.addMedlem("Jasser", 18, true, false);
+        controller.addMedlem("Yusef", 61, true, false);
     }
 }

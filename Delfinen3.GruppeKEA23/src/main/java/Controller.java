@@ -1,14 +1,17 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Controller {
     private final Database database;
     private  final Kasserer kasserer;
+    private Random random;
 
 
     public Controller() {
         this.database = new Database();
         this.kasserer = new Kasserer(this);
+        this.random = new Random();
     }
 
     public double udregnIndkomst(){
@@ -16,12 +19,23 @@ public class Controller {
     }
 
 
-    public void addMedlem(String name, int age, int medlemID,
-                          boolean konkurrenceSvømmer,
-                          boolean aktiv){
-        database.addMedlem(name, age, medlemID,
-                konkurrenceSvømmer,aktiv);
+    public void addMedlem(String name, int age, boolean konkurrenceSvømmer, boolean aktiv) {
+        int medlemID = generateUniqueMedlemID();
+        database.addMedlem(name, age, konkurrenceSvømmer, aktiv);
+        System.out.println("Medlem added with MedlemID: " + medlemID);
+    }
 
+    private int generateUniqueMedlemID() {
+        int potentialMedlemID = 1;
+
+        while (medlemIDExists(potentialMedlemID)) {
+            potentialMedlemID++;
+        }
+        return potentialMedlemID;
+    }
+
+    private boolean medlemIDExists(int medlemID) {
+        return database.medlemIDExists(medlemID);
     }
     public void gemTilCSV (){
         database.gemMedlemmereTilCSV();

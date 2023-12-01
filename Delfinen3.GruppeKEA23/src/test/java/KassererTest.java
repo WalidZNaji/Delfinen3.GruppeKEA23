@@ -44,26 +44,26 @@ class KassererTest {
 
     void premadeMedlemmereJunior() {
         // Under 18 && aktiv = 1000kr.
-            controller.addMedlem("Sina", 17, 1, true, true);
-            controller.addMedlem("Jasser", 17, 2, true, true);
-            controller.addMedlem("Yusef", 17, 3, true, true);
+            controller.addMedlem("Sina", 17, true, true);
+            controller.addMedlem("Jasser", 17, true, true);
+            controller.addMedlem("Yusef", 17, true, true);
     }
     void premadeMedlemmereSeniorRabat() {
         // Over 60 && aktiv = 1600kr + 25% rabat.
-            controller.addMedlem("Sina", 61, 1, true, true);
-            controller.addMedlem("Jasser", 61, 2, true, true);
-            controller.addMedlem("Yusef", 61, 3, true, true);
+            controller.addMedlem("Sina", 61, true, true);
+            controller.addMedlem("Jasser", 61, true, true);
+            controller.addMedlem("Yusef", 61,true, true);
     }
     void premadeMedlemmereSenior() {
         // >= 18 && aktiv = 1600kr
-            controller.addMedlem("Sina", 18, 1, true, true);
-            controller.addMedlem("Jasser", 18, 2, true, true);
-            controller.addMedlem("Yusef", 18, 3, true, true);
+            controller.addMedlem("Sina", 18,true, true);
+            controller.addMedlem("Jasser", 18, true, true);
+            controller.addMedlem("Yusef", 18, true, true);
     }
     void premadeMedlemmerePassiv() {
         // Passivt medlemsskab uanset alder = 500kr
-            controller.addMedlem("Sina", 17, 1, true, false);
-            controller.addMedlem("Jasser", 18, 2, true, false);
-            controller.addMedlem("Yusef", 61, 3, true, false);
+            controller.addMedlem("Sina", 17, true, false);
+            controller.addMedlem("Jasser", 18, true, false);
+            controller.addMedlem("Yusef", 61, true, false);
     }
 }
