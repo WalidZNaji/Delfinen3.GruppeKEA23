@@ -15,9 +15,12 @@ public class Database {
         this.konkurrenceSvømmereResultater = new ArrayList<>();
     }
     public void addResultat(String name, int age, int medlemID, boolean konkurrenceSvømmer,
-                            boolean aktiv, double crawlTid, double brystTid, double butterflyTid, double rygCrawlTid){
+                            boolean aktiv, double crawlTid, double brystTid, double butterflyTid, double rygCrawlTid,
+                            String crawlDato, String brystDato, String butterflyDato, String rygcrawlDato){
 
-        konkurrenceSvømmereResultater.add(new Resultat(name, age, medlemID, konkurrenceSvømmer,aktiv, crawlTid, brystTid, butterflyTid, rygCrawlTid));
+        konkurrenceSvømmereResultater.add(new Resultat(name, age, medlemID, konkurrenceSvømmer,aktiv,
+                crawlTid, brystTid, butterflyTid, rygCrawlTid,
+                crawlDato, brystDato, butterflyDato, rygcrawlDato));
     }
 
 
@@ -83,24 +86,6 @@ public class Database {
         }
         return lokalListe;
     }
-
-    public List<Resultat> top5Crawl() {
-
-        List<Resultat> crawlResultater = new ArrayList<>(konkurrenceSvømmereResultater);
-
-        Collections.sort(crawlResultater, new CrawlComparator());
-        int størsteStørrelse = Math.min(5, konkurrenceSvømmereResultater.size());
-        List<Resultat> top5CrawlResultater = crawlResultater.subList(0, størsteStørrelse);
-
-        for (Resultat resultat : top5CrawlResultater) {
-            System.out.println("Svømmer " + resultat.getName() + "Crawltid" + resultat.getCrawlTid());
-
-        }
-        return top5CrawlResultater;
-    }
-
-
-
     public void setCrawlTid(double nyCrawlTid) {
         resultat.setCrawlTid(nyCrawlTid);
     }
@@ -114,6 +99,18 @@ public class Database {
 
     public void setRygCrawlTid(double nyRygCrawlTid) {
         resultat.setRygCrawlTid(nyRygCrawlTid);
+    }
+    public double getCrawlTid() {
+        return resultat.getCrawlTid();
+    }
+    public double getBrystTid() {
+        return resultat.getBrystTid();
+    }
+    public double getbutterflyTid() {
+        return resultat.getButterflyTid();
+    }
+    public double getrygcrawlTid() {
+        return resultat.getRygCrawlTid();
     }
 
 }

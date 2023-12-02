@@ -221,13 +221,12 @@ public class Ui {
                         medlem.getMedlemID() + ", " +
                         medlem.isKonkurrenceSvømmer() + ", " +
                         medlem.isAktiv() + ", ");
-
             }
             int medlemPick = 0;
             while (true) {
                 try {
                     medlemPick = scan.nextInt();
-                    scan.nextLine(); // Håndterer Scanner Bug
+                    //scan.nextLine(); // Consume the newline character
                     if (medlemPick > 0 && medlemPick <= søgeresultat.size()) {
                         medlemToEdit = søgeresultat.get(medlemPick - 1);
                         break;
@@ -236,24 +235,28 @@ public class Ui {
                     }
                 } catch (InputMismatchException e) {
                     System.out.print("Ugyldigt input. Indtast et tal fx. '1': ");
-                    scan.nextLine();
-
+                    scan.nextLine(); // Consume the invalid input
                 }
             }
-
         }
+
+
 
         if (medlemToEdit != null) {
             System.out.println("Vælg disciplin:");
             listeAfDiscipliner();
             System.out.print("Indtast tal: ");
             int disciplinInput = scan.nextInt();
-
+            //scan.nextLine();
 
             double crawlTid = 0.0;
             double brystTid = 0.0;
             double butterflyTid = 0.0;
             double rygCrawlTid = 0.0;
+            String crawlDato = null;
+            String brystDato = null;
+            String butterflyDato = null;
+            String rygcrawlDato = null;
 
             ArrayList<Resultat> existingResultat =
                     controller.findResultatObjectByMedlemID(medlemToEdit.getMedlemID());
@@ -264,57 +267,106 @@ public class Ui {
                 brystTid = existingResult.getBrystTid();
                 butterflyTid = existingResult.getButterflyTid();
                 rygCrawlTid = existingResult.getRygCrawlTid();
+                crawlDato = existingResult.getCrawlDato();
+                brystDato = existingResult.getCrawlDato();
+                butterflyDato = existingResult.getCrawlDato();
+                rygcrawlDato = existingResult.getCrawlDato();
             }
-
+            boolean inputValid = true; // Bruges til kontrol ved udprintning.
+            boolean runAgain = true; // Til at loop hver case # indtil korretkt indput.
             switch (disciplinInput) {
                 case 1 -> {
-                    System.out.println("Indtast crawl tid: ");
-                    crawlTid = scan.nextDouble();
+                    while (runAgain) {
+                        try {
+                            System.out.println("Indtast crawl tid: ");
+                            crawlTid = scan.nextDouble();
+                            System.out.println("Dato: ");
+                            crawlDato = scan.next(); // læser som string så der kan bruges '/, -'
+                            break;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Ugyldigt svar.");
+                            inputValid = false; // Ugyldigt input, se 'else' ved udprintnings blok.
+                        }
+                        runAgain = false;
+                    }
                 }
                 case 2 -> {
-                    System.out.println("Indtast brystsvømnings tid: ");
-                    brystTid = scan.nextDouble();
+                    while (runAgain) {
+                        try {
+                            System.out.println("Indtast brystsvømnings tid: ");
+                            brystTid = scan.nextDouble();
+                            System.out.println("Dato: ");
+                            brystDato = scan.next();
+                            break;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Ugyldigt svar.");
+                            inputValid = false;
+                        }
+                        runAgain = false;
+                    }
                 }
                 case 3 -> {
-                    System.out.println("Indtast butterfly tid: ");
-                    butterflyTid = scan.nextDouble();
+                    while (runAgain) {
+                        try {
+                            System.out.println("Indtast butterfly tid: ");
+                            butterflyTid = scan.nextDouble();
+                            System.out.println("Dato: ");
+                            butterflyDato = scan.next();
+                            break;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Ugyldigt svar.");
+                            inputValid = false;
+                        }
+                        runAgain = false;
+                    }
                 }
                 case 4 -> {
-                    System.out.println("Indtast rygcrawl tid: ");
-                    rygCrawlTid = scan.nextDouble();
+                    while (runAgain) {
+                        try {
+                            System.out.println("Indtast rygcrawl tid: ");
+                            rygCrawlTid = scan.nextDouble();
+                            System.out.println("Dato: ");
+                            rygcrawlDato = scan.next();
+                            break;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Ugyldigt svar.");
+                            inputValid = false;
+                        }
+                        runAgain = false;
+                    }
                 }
             }
 
+            if (inputValid) { // Kontrol før ændring.
+                if (!existingResultat.isEmpty()) {
+                    Resultat existingResult = existingResultat.get(0);
 
-            if (!existingResultat.isEmpty()) {
-                Resultat existingResult = existingResultat.get(0);
+                    if (crawlTid > 0) existingResult.setCrawlTid(crawlTid);
+                    if (brystTid > 0) existingResult.setBrystTid(brystTid);
+                    if (butterflyTid > 0) existingResult.setButterflyTid(butterflyTid);
+                    if (rygCrawlTid > 0) existingResult.setRygCrawlTid(rygCrawlTid);
+                    if (crawlDato != null) existingResult.setCrawlDato(crawlDato);
+                    if (brystDato != null) existingResult.setBrystDato(brystDato);
+                    if (butterflyDato != null) existingResult.setButterflyDato(butterflyDato);
+                    if (rygcrawlDato != null) existingResult.setRygCrawlDato(rygcrawlDato);
 
-                if (crawlTid > 0) existingResult.setCrawlTid(crawlTid);
-                if (brystTid > 0) existingResult.setBrystTid(brystTid);
-                if (butterflyTid > 0) existingResult.setButterflyTid(butterflyTid);
-                if (rygCrawlTid > 0) existingResult.setRygCrawlTid(rygCrawlTid);
+                    System.out.println(medlemToEdit.getName() + "'s resultat er blevet opdateret.");
+                } else {
+                    controller.addResultat(
+                            medlemToEdit.getName(), medlemToEdit.getAge(), medlemToEdit.getMedlemID(),
+                            medlemToEdit.isKonkurrenceSvømmer(), medlemToEdit.isAktiv(), crawlTid,
+                            brystTid, butterflyTid, rygCrawlTid, crawlDato, brystDato, butterflyDato,
+                            rygcrawlDato
+                    );
 
-                System.out.println(medlemToEdit.getName() + "'s resultat er blevet opdateret.");
-            } else {
-
-                controller.addResultat(
-                        medlemToEdit.getName(),
-                        medlemToEdit.getAge(),
-                        medlemToEdit.getMedlemID(),
-                        medlemToEdit.isKonkurrenceSvømmer(),
-                        medlemToEdit.isAktiv(),
-                        crawlTid,
-                        brystTid,
-                        butterflyTid,
-                        rygCrawlTid
-                );
-
-                System.out.println(medlemToEdit.getName() + "'s resultat er blevet tilføjet.");
+                    System.out.println(medlemToEdit.getName() + "'s resultat er blevet tilføjet.");
+                }
             }
         }
 
-        scan.nextLine(); // Consume the newline character
+        scan.nextLine();
     }
+
 
     public void listeAfDiscipliner() {
         System.out.println("""
@@ -335,18 +387,34 @@ public class Ui {
     public void top5Swimmers() {
         System.out.println("Top 5 Svømmere:");
 
-        for (String discipline : new String[]{"Crawl", "BrystSvømning", "Butterfly", "Rygcrawl"}) {
-            System.out.println("Disciplin: " + discipline);
+        System.out.println("Vælg disciplin:");
+        listeAfDiscipliner();
+        System.out.print("Indtast tal: ");
+        int disciplinInput = scan.nextInt();
+        scan.nextLine(); // Consume the newline character
 
-            ArrayList<Resultat> topJunior = findTopSwimmers(discipline, "Junior");
-            ArrayList<Resultat> topSenior = findTopSwimmers(discipline, "Senior");
-
-            System.out.println("Top 5 Junior Svømmere:");
-            displaySwimmers(topJunior);
-
-            System.out.println("Top 5 Senior Svømmere:");
-            displaySwimmers(topSenior);
+        String discipline;
+        switch (disciplinInput) {
+            case 1 -> discipline = "Crawl";
+            case 2 -> discipline = "BrystSvømning";
+            case 3 -> discipline = "Butterfly";
+            case 4 -> discipline = "Rygcrawl";
+            default -> {
+                System.out.println("Ugyldigt valg. Vælg en disciplin fra listen.");
+                return;
+            }
         }
+
+        System.out.println("Top 5 Svømmere for " + discipline + ":");
+
+        ArrayList<Resultat> topJunior = findTopSwimmers(discipline, "Junior");
+        ArrayList<Resultat> topSenior = findTopSwimmers(discipline, "Senior");
+
+        System.out.println("Top 5 Junior Svømmere:");
+        displaySwimmers(topJunior, discipline);
+
+        System.out.println("Top 5 Senior Svømmere:");
+        displaySwimmers(topSenior, discipline);
     }
 
     private ArrayList<Resultat> findTopSwimmers(String discipline, String ageCategory) {
@@ -393,9 +461,9 @@ public class Ui {
         return new ArrayList<>(topSwimmers.subList(0, Math.min(5, topSwimmers.size())));
     }
 
-    private void displaySwimmers(ArrayList<Resultat> swimmers) {
+    private void displaySwimmers(ArrayList<Resultat> swimmers, String discipline) {
         for (Resultat swimmer : swimmers) {
-            System.out.println(swimmer);
+            System.out.println(swimmer.getResultStringForDiscipline(discipline));
         }
         System.out.println();  // skille linje mellem disciplinerne
     }

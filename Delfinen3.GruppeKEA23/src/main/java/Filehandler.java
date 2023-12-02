@@ -73,7 +73,9 @@ public class Filehandler {
                         resultat.getCrawlTid() + "," +
                         resultat.getBrystTid() + "," +
                         resultat.getButterflyTid() + "," +
-                        resultat.getRygCrawlTid();
+                        resultat.getRygCrawlTid() + "," + resultat.getCrawlDato() + "," +
+                        resultat.getBrystDato() + "," + resultat.getButterflyDato() + "," +
+                        resultat.getRygCrawlDato();
                 fileWriter.println(linje);
             }
             fileWriter.close();
@@ -98,7 +100,9 @@ public class Filehandler {
                         Integer.parseInt(attributes[2].trim()), Boolean.parseBoolean(attributes[3].trim()),
                         Boolean.parseBoolean(attributes[4].trim()), Double.parseDouble(attributes[5].trim()),
                         Double.parseDouble(attributes[6].trim()), Double.parseDouble(attributes[7].trim()),
-                        Double.parseDouble(attributes[8].trim()));
+                        Double.parseDouble(attributes[8].trim()), attributes[9],
+                        attributes[10], attributes[11],
+                        attributes[12]);
                 resultaterICSV.add(resultat);
             }
             return resultaterICSV;

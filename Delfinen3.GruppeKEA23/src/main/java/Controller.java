@@ -63,14 +63,13 @@ public class Controller {
 
 
     public void addResultat(String name, int age, int medlemID, boolean konkurrenceSvømmer,
-                            boolean aktiv,double crawlTid, double brystTid, double butterflyTid, double rygCrawlTid){
-        database.addResultat(name, age, medlemID, konkurrenceSvømmer,aktiv, crawlTid, brystTid, butterflyTid, rygCrawlTid);
+                            boolean aktiv,double crawlTid, double brystTid, double butterflyTid,
+                            double rygCrawlTid, String crawlDato, String brystDato, String butterflyDato, String rygcrawlDato){
+        database.addResultat(name, age, medlemID, konkurrenceSvømmer,aktiv, crawlTid, brystTid, butterflyTid,
+                rygCrawlTid, crawlDato, brystDato, butterflyDato, rygcrawlDato);
     }
     public ArrayList<Resultat> getResultater() {
         return database.getResultater();
-    }
-    public List<Resultat> top5Crawl() {
-        return database.top5Crawl();
     }
 
     public void setCrawlTid(double nyCrawlTid) {
@@ -86,6 +85,9 @@ public class Controller {
 
     public void setRygCrawlTid(double nyRygCrawlTid) {
         database.setRygCrawlTid(nyRygCrawlTid);
+    }
+    public double getCrawlTid() {
+        return database.getCrawlTid();
     }
 
 }
