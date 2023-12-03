@@ -17,6 +17,12 @@ public class Controller {
     public double udregnIndkomst(){
        return kasserer.generateIncomeOverview();
     }
+    public double getSingleMedlemKontingent(int medlemID) {
+        return kasserer.getSingleMedlemKontingent(medlemID);
+    }
+    public String findMedlemByID(int medlemID) {
+        return database.findMedlemByID(medlemID);
+    }
 
 
     public void addMedlem(String name, int age, boolean konkurrenceSvømmer, boolean aktiv) {

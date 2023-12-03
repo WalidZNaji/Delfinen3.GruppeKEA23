@@ -14,6 +14,14 @@ public class Database {
         this.medlemmere = new ArrayList<>();
         this.konkurrenceSvømmereResultater = new ArrayList<>();
     }
+    public String findMedlemByID(int medlemID) {
+        for (Medlem m:medlemmere) {
+            if (m.getMedlemID() == medlemID) {
+                return m.getName();
+            }
+        }
+        return null;
+    }
     public void addResultat(String name, int age, int medlemID, boolean konkurrenceSvømmer,
                             boolean aktiv, double crawlTid, double brystTid, double butterflyTid, double rygCrawlTid,
                             String crawlDato, String brystDato, String butterflyDato, String rygcrawlDato){
@@ -28,10 +36,9 @@ public class Database {
         return konkurrenceSvømmereResultater;
     }
 
-    public int addMedlem(String name, int age, boolean konkurrenceSvømmer, boolean aktiv) {
+    public void addMedlem(String name, int age, boolean konkurrenceSvømmer, boolean aktiv) {
         int medlemID = generateUniqueMedlemID();
         medlemmere.add(new Medlem(name, age, medlemID, konkurrenceSvømmer, aktiv));
-        return medlemID;
     }
 
     private int generateUniqueMedlemID() {

@@ -5,6 +5,30 @@ public class Kasserer {
     public Kasserer(Controller controller) {
         this.controller = controller;
     }
+    public double getSingleMedlemKontingent(int medlemID) {
+        double ung = 0;
+        for (Medlem m : controller.getMedlemmere()) {
+            if (medlemID == m.getMedlemID()) {
+                if (m.isAktiv() && m.getAge() < 18) {
+                    ung = 1000;
+                    return ung;
+                }
+                if (m.isAktiv() && m.getAge() >= 18) {
+                    double basisGebyr = 1600;
+                    if (m.getAge() > 60) {
+                        basisGebyr *= 0.75;
+                    }
+                    return basisGebyr;
+                }
+                double passivIndkomst = 0;
+                if (!m.isAktiv()) {
+                    passivIndkomst = 500;
+                }
+                return passivIndkomst;
+            }
+        }
+        return 0;
+    }
     public double generateIncomeOverview() { // Tested
             double totalIndkomst = 0.0;
 

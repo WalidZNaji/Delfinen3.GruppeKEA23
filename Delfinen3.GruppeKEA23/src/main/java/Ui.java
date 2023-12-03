@@ -71,7 +71,8 @@ public class Ui {
                     1. Opret medlem
                     2. Vis medlemsoversigt
                     3. Vis kontigent oversigt
-                    4. Tilbage til hovedmenu
+                    4. Vis enkelt medlemds kontingent oversigt
+                    5. Tilbage til hovedmenu
                     """);
             try {
                 userInput = Integer.parseInt(scan.nextLine());
@@ -90,6 +91,15 @@ public class Ui {
                             System.out.println(controller.udregnIndkomst() + "kr");
                         }
                         case 4 -> {
+                            System.out.print("Søg efter medlems ID: ");
+                            int søgning = scan.nextInt();
+                            scan.nextLine();
+                            String navnPåMedlem = controller.findMedlemByID(søgning);
+                            double kontingentBetaling = controller.getSingleMedlemKontingent(søgning);
+                            System.out.println(navnPåMedlem + "s kontingent betaling: " + kontingentBetaling
+                            + "\n");
+                        }
+                        case 5 -> {
                             runAgain = false;
                         }
                     }
