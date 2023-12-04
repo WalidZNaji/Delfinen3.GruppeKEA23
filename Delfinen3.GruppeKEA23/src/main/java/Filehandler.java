@@ -37,10 +37,10 @@ public class Filehandler {
         ArrayList<Medlem> medlemmereICSV = new ArrayList<>();
 
         try (Scanner fileReader = new Scanner(file)) {
-            if (file.length() == 0) {
+            if (!(file.length() == 0)) {
+                fileReader.nextLine(); // Skipping the header
             }
-            // Skipping the header
-            fileReader.nextLine();
+
 
             while (fileReader.hasNext()) {
                 String linje = fileReader.nextLine();
@@ -62,7 +62,7 @@ public class Filehandler {
             fileWriter = new PrintStream(new FileOutputStream(file2));
 
             if(file2.length()==0) {
-                fileWriter.println("Name,Age,MedlemID,KonkurrenceSvømmer,Aktiv,Crawltid,Brysttid,Butterflytid,Rygcrawltid");
+                fileWriter.println("Name,Age,MedlemID,KonkurrenceSvømmer,Aktiv,Crawltid,Brysttid,Butterflytid,Rygcrawltid,CrawlDato,BrystDato,ButterflyDato,RygCrawlDato");
             }
             for (Resultat resultat : resultater) {
                 String linje = resultat.getName() + "," +
@@ -88,7 +88,8 @@ public class Filehandler {
         ArrayList<Resultat> resultaterICSV = new ArrayList<>();
 
         try (Scanner fileReader = new Scanner(file2)) {
-            if (file.length() == 0) {
+            if (!(file.length() == 0)) {
+                fileReader.nextLine(); // Skipping the header
             }
 
 

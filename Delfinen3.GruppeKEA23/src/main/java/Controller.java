@@ -95,5 +95,8 @@ public class Controller {
     public double getCrawlTid() {
         return database.getCrawlTid();
     }
+    public ArrayList<String> getMedlemmereIRestance() {
+        return database.medlemmereIRestance;
 
+}
 }

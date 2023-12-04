@@ -53,7 +53,7 @@ public class Resultat extends Medlem {
 
         public Resultat(String name, int age, int meldlemID, boolean konkurrenceSvømmer, boolean aktiv,
                     double crawlTid, double brystTid, double butterflyTid, double rygCrawlTid,
-                        String crawlDato, String brystDato, String butterDato, String rygCrawlDato ) {
+                        String crawlDato, String brystDato, String butterDato, String rygCrawlDato) {
         super(name, age, meldlemID, konkurrenceSvømmer, aktiv);
         this.crawlTid = crawlTid;
         this.brystTid = brystTid;

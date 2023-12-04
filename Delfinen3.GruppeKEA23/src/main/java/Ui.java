@@ -72,7 +72,8 @@ public class Ui {
                     2. Vis medlemsoversigt
                     3. Vis kontigent oversigt
                     4. Vis enkelt medlemds kontingent oversigt
-                    5. Tilbage til hovedmenu
+                    5. Restance
+                    6. Tilbage til hovedmenu
                     """);
             try {
                 userInput = Integer.parseInt(scan.nextLine());
@@ -110,6 +111,7 @@ public class Ui {
             }
 
         }
+
     }
 
     public void trænerMenu() {
@@ -137,6 +139,54 @@ public class Ui {
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Ugyldigt input. Indtast et tal mellem 1-4");
+            }
+        }
+    }
+
+/*
+    public void restanceMenu() {
+        boolean runAgain = true;
+        int userInput;
+
+        while (runAgain) {
+            System.out.println("""
+                    1. Tilføj medlem til restance.
+                    2. Fjern medlem fra restance
+                    3. Vis oversigt over medlemmere i restance
+                    4. Tilbage til hovedmenu
+                     """);
+            try {
+                userInput = Integer.parseInt(scan.nextLine());
+                if (userInput < 1 || userInput > 4) {
+                    System.out.println("Ugyldigt input. Indtast et tal mellem 1-4");
+                } else {
+                    switch (userInput) {
+                        case 1 -> {
+                            System.out.println("Indtast medlemmets ID: ");
+                            int medlemID = scan.nextInt();
+                            scan.nextLine();
+                           // controller.addMedlemRestance(medlemID);
+                        }
+                        case 2 -> {
+                            System.out.println("Indtast medlemmets ID: ");
+                            int medlemID = scan.nextInt();
+                            scan.nextLine();
+                           // controller.removeMedlemRestance(medlemID);
+                        }
+                        case 3 -> {
+                            System.out.println("Medlemmere i restance: ");
+                            for (String m:controller.getMedlemmereIRestance()) {
+
+                                System.out.println(m);
+                            }
+                        }
+                        case 4 -> runAgain = false;
+
+                    }
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Ugyldigt input. Indtast et tal mellem 1-4");
+
             }
         }
     }
@@ -280,9 +330,9 @@ public class Ui {
                 butterflyTid = existingResult.getButterflyTid();
                 rygCrawlTid = existingResult.getRygCrawlTid();
                 crawlDato = existingResult.getCrawlDato();
-                brystDato = existingResult.getCrawlDato();
-                butterflyDato = existingResult.getCrawlDato();
-                rygcrawlDato = existingResult.getCrawlDato();
+                brystDato = existingResult.getBrystDato();
+                butterflyDato = existingResult.getButterflyDato();
+                rygcrawlDato = existingResult.getRygCrawlDato();
             }
             boolean inputValid = true; // Bruges til kontrol ved udprintning.
             boolean runAgain = true; // Til at loop hver case # indtil korretkt indput.
@@ -479,6 +529,7 @@ public class Ui {
         }
         System.out.println();  // skille linje mellem disciplinerne
     }
+
 
 }
 

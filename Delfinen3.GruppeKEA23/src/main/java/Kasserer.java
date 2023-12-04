@@ -89,6 +89,7 @@ public class Kasserer {
 
             return passivIndkomst;
         }
+
 }
 
 

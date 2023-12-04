@@ -9,10 +9,12 @@ public class Database {
 
     ArrayList<Medlem> medlemmere;
     ArrayList<Resultat> konkurrenceSvømmereResultater;
+    ArrayList<String> medlemmereIRestance;
 
     public Database() {
         this.medlemmere = new ArrayList<>();
         this.konkurrenceSvømmereResultater = new ArrayList<>();
+        this.medlemmereIRestance = new ArrayList<>();
     }
 
     public String findMedlemByID(int medlemID) {
@@ -120,7 +122,10 @@ public class Database {
     public double getrygcrawlTid() {
         return resultat.getRygCrawlTid();
     }
-
+    public ArrayList<String> getMedlemmereIRestance() {
+        return medlemmereIRestance;
 }
+}
+
 
 
