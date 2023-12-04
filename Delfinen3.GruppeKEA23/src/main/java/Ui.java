@@ -100,10 +100,8 @@ public class Ui {
                             System.out.println(navnPåMedlem + "s kontingent betaling: " + kontingentBetaling
                             + "\n");
                         }
-                        //case 5 - >
-                        case 6 -> {
-                            runAgain = false;
-                        }
+                        case 5 -> restanceMenu();
+                        case 6 -> runAgain = false;
                     }
                 }
             } catch (NumberFormatException e) {
@@ -143,7 +141,7 @@ public class Ui {
         }
     }
 
-/*
+
     public void restanceMenu() {
         boolean runAgain = true;
         int userInput;
@@ -151,9 +149,9 @@ public class Ui {
         while (runAgain) {
             System.out.println("""
                     1. Tilføj medlem til restance.
-                    2. Fjern medlem fra restance
-                    3. Vis oversigt over medlemmere i restance
-                    4. Tilbage til hovedmenu
+                    2. Fjern medlem fra restance.
+                    3. Vis oversigt over medlemmere i restance.
+                    4. Tilbage.
                      """);
             try {
                 userInput = Integer.parseInt(scan.nextLine());
@@ -165,20 +163,23 @@ public class Ui {
                             System.out.println("Indtast medlemmets ID: ");
                             int medlemID = scan.nextInt();
                             scan.nextLine();
-                           // controller.addMedlemRestance(medlemID);
+                            String medlemName = controller.findMedlemByID(medlemID);
+                            controller.addMedlemToRestance(medlemName, medlemID);
+                            System.out.println(medlemName + ", " + medlemID + " er blevet tilføjet" +
+                                    " til restance listen.");
                         }
                         case 2 -> {
                             System.out.println("Indtast medlemmets ID: ");
                             int medlemID = scan.nextInt();
                             scan.nextLine();
-                           // controller.removeMedlemRestance(medlemID);
+                            String medlemName = controller.findMedlemByID(medlemID);
+                            controller.removeMedlemFromRestance(medlemID);
+                            System.out.println(medlemName + ", " + medlemID + " er blevet fjernet" +
+                                    " fra restance listen.");
+
                         }
                         case 3 -> {
-                            System.out.println("Medlemmere i restance: ");
-                            for (String m:controller.getMedlemmereIRestance()) {
-
-                                System.out.println(m);
-                            }
+                            oversigtRestance();
                         }
                         case 4 -> runAgain = false;
 
@@ -191,8 +192,6 @@ public class Ui {
         }
     }
 
-
- */
     public void createMedlem() {
 
         try {
@@ -528,6 +527,16 @@ public class Ui {
             System.out.println(swimmer.getResultStringForDiscipline(discipline));
         }
         System.out.println();  // skille linje mellem disciplinerne
+    }
+    public void oversigtRestance() {
+        if (!controller.getMedlemmereIRestance().isEmpty()) {
+            System.out.println("Medlemmere i restance:");
+            for (Restance re : controller.getMedlemmereIRestance()) {
+                System.out.println("Navn: " + re.getName() + " ID: " + re.getMedlemID());
+            }
+        } else if (controller.getMedlemmereIRestance().isEmpty()) {
+            System.out.println("Ingen medlemmere i restance");
+        }
     }
 
 

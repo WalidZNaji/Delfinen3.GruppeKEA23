@@ -95,8 +95,13 @@ public class Controller {
     public double getCrawlTid() {
         return database.getCrawlTid();
     }
-    public ArrayList<String> getMedlemmereIRestance() {
+    public ArrayList<Restance> getMedlemmereIRestance() {
         return database.medlemmereIRestance;
-
-}
+    }
+    public void addMedlemToRestance(String name, int medlemID) {
+        database.addMedlemToRestance(name, medlemID);
+    }
+    public void removeMedlemFromRestance(int medlemID) {
+        database.removeMedlemFromRestance(medlemID);
+    }
 }

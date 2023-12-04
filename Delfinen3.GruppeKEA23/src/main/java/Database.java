@@ -1,15 +1,14 @@
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
 
 public class Database {
     Filehandler filehandler = new Filehandler();
     Resultat resultat = new Resultat();
+    Restance restance = new Restance();
+
 
     ArrayList<Medlem> medlemmere;
     ArrayList<Resultat> konkurrenceSvømmereResultater;
-    ArrayList<String> medlemmereIRestance;
+    ArrayList<Restance> medlemmereIRestance;
 
     public Database() {
         this.medlemmere = new ArrayList<>();
@@ -122,9 +121,31 @@ public class Database {
     public double getrygcrawlTid() {
         return resultat.getRygCrawlTid();
     }
-    public ArrayList<String> getMedlemmereIRestance() {
+
+    // Restance
+    public ArrayList<Restance> getMedlemmereIRestance() {
         return medlemmereIRestance;
-}
+    }
+    public String getRestanceName() {
+        return restance.getName();
+    }
+    public int getRestanceID() {
+        return restance.getMedlemID();
+    }
+    public void addMedlemToRestance(String name, int medlemId) {
+        restance = new Restance(name, medlemId);
+        medlemmereIRestance.add(restance);
+    }
+    public void removeMedlemFromRestance(int medlemID) {
+        ArrayList<Restance> fjernMedlemmere = new ArrayList<>();
+        for (Restance re:medlemmereIRestance) {
+            if (re.getMedlemID() == medlemID) {
+                fjernMedlemmere.add(re);
+            }
+        }
+        medlemmereIRestance.removeAll(fjernMedlemmere);
+    }
+
 }
 
 
