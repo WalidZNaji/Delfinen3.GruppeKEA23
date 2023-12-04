@@ -76,8 +76,8 @@ public class Ui {
                     """);
             try {
                 userInput = Integer.parseInt(scan.nextLine());
-                if (userInput < 1 || userInput > 4) {
-                    System.out.println("Ugyldigt input. Indtast et tal mellem 1-4");
+                if (userInput < 1 || userInput > 6) {
+                    System.out.println("Ugyldigt input. Indtast et tal mellem 1-6");
                 } else {
                     switch (userInput) {
                         case 1 -> {
@@ -99,7 +99,8 @@ public class Ui {
                             System.out.println(navnPåMedlem + "s kontingent betaling: " + kontingentBetaling
                             + "\n");
                         }
-                        case 5 -> {
+                        //case 5 - >
+                        case 6 -> {
                             runAgain = false;
                         }
                     }
@@ -141,6 +142,7 @@ public class Ui {
     }
 
 
+ */
     public void createMedlem() {
 
         try {

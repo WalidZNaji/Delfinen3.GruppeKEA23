@@ -6,7 +6,6 @@ public class Medlem {
     private boolean aktiv; // Hvis false = passiv.
 
 public Medlem() {
-
 }
     public Medlem(String name, int age, int meldlemID, boolean konkurrenceSvømmer,
                   boolean aktiv) {

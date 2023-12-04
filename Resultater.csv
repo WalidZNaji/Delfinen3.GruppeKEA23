@@ -1,2 +1,2 @@
-Name,Age,MedlemID,KonkurrenceSvømmer,Aktiv,Crawltid,Brysttid,Butterflytid,Rygcrawltid
-ludi,15,642177,true,true,24.0,0.0,0.0,0.0,121099,0,0,0
+Name,Age,MedlemID,KonkurrenceSvømmer,Aktiv,Crawltid,Brysttid,Butterflytid,Rygcrawltid,CrawlDato,BrystDato,ButterflyDato,RygCrawlDato
+ludi,15,642177,true,true,22.0,0.0,0.0,0.0,04-12-2023,null,null,null

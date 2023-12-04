@@ -14,6 +14,7 @@ public class Database {
         this.medlemmere = new ArrayList<>();
         this.konkurrenceSvømmereResultater = new ArrayList<>();
     }
+
     public String findMedlemByID(int medlemID) {
         for (Medlem m:medlemmere) {
             if (m.getMedlemID() == medlemID) {

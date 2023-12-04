@@ -90,8 +90,7 @@ public class Filehandler {
         try (Scanner fileReader = new Scanner(file2)) {
             if (file.length() == 0) {
             }
-            // Skipping the header
-            fileReader.nextLine();
+
 
             while (fileReader.hasNext()) {
                 String linje = fileReader.nextLine();
