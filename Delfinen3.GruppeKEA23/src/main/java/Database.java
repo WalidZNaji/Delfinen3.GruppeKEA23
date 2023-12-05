@@ -68,12 +68,18 @@ public class Database {
     public void gemResultaterTilCSV(){
         filehandler.gemResultaterTilCSV(konkurrenceSvømmereResultater);
     }
+    public void gemRestanceCSV(){
+        filehandler.gemRestanceCSV(medlemmereIRestance);
+    }
 
     public void loadMedlemmereFromCSV() {
         medlemmere = filehandler.loadMedlemmereFromCSV();
     }
     public void loadResultatFraCSV() {
         konkurrenceSvømmereResultater = filehandler.loadResultaterFraCSV();
+    }
+    public void loadRestanceFraCSV(){
+        medlemmereIRestance = filehandler.loadFromRestance();
     }
     public ArrayList<Medlem> findMedlemByName(String medlemsNavn) {
         ArrayList<Medlem> lokalMedlemmere = new ArrayList<>();

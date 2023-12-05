@@ -14,6 +14,7 @@ public class Ui {
     public void startProgram() {
         controller.loadMedlemmereFraCSV();
         controller.loadResultatFraCSV();
+        controller.loadRestanceFraCSV();
         startMessage();
         startMenu();
     }
@@ -51,6 +52,7 @@ public class Ui {
                             runAgain = false;
                             controller.gemTilCSV();
                             controller.gemResultaterTilCSV();
+                            controller.gemRestanceCSV();
 
                         }
 
@@ -71,7 +73,7 @@ public class Ui {
                     1. Opret medlem
                     2. Vis medlemsoversigt
                     3. Vis kontigent oversigt
-                    4. Vis enkelt medlemds kontingent oversigt
+                    4. Vis enkelt medlems kontingent oversigt
                     5. Restance
                     6. Tilbage til hovedmenu
                     """);

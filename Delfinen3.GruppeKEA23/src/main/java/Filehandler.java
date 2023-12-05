@@ -111,4 +111,41 @@ public class Filehandler {
             throw new RuntimeException(e);
         }
     }
+    public void gemRestanceCSV(ArrayList<Restance> restance) {
+        try {
+            fileWriter = new PrintStream(new FileOutputStream(file3));
+
+            if(!(file.length() ==0)) {
+                fileWriter.println("Name,MedlemID");
+            }
+            for (Restance medlemIRestance : restance) {
+                String linje = medlemIRestance.getName() + "," + medlemIRestance.getMedlemID();
+
+                fileWriter.println(linje);
+            }
+            fileWriter.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    public ArrayList<Restance> loadFromRestance() {
+        ArrayList<Restance> restanceICSV = new ArrayList<>();
+
+        try (Scanner fileReader = new Scanner(file3)) {
+            if (!(file.length() == 0)) {
+                fileReader.nextLine(); // Skipping the header
+            }
+            while (fileReader.hasNext()) {
+                String linje = fileReader.nextLine();
+                String[] attributes = linje.split(",");
+                Restance restance = new Restance(attributes[0].trim(), Integer.parseInt(attributes[1].trim()));
+                restanceICSV.add(restance);
+            }
+            return restanceICSV;
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

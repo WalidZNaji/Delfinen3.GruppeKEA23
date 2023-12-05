@@ -49,6 +49,9 @@ public class Controller {
     public void gemResultaterTilCSV(){
         database.gemResultaterTilCSV();
     }
+    public void gemRestanceCSV(){
+        database.gemRestanceCSV();
+    }
     public ArrayList<Medlem> getMedlemmere() {
         return database.medlemmere;
     }
@@ -58,6 +61,9 @@ public class Controller {
     }
     public void loadResultatFraCSV() {
         database.loadResultatFraCSV();
+    }
+    public void loadRestanceFraCSV(){
+        database.loadRestanceFraCSV();
     }
     public ArrayList<Medlem> findMedlemByName(String medlemsNavn) {
         return database.findMedlemByName(medlemsNavn);
