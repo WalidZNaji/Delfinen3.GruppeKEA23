@@ -164,18 +164,24 @@ public class Ui {
                             int medlemID = scan.nextInt();
                             scan.nextLine();
                             String medlemName = controller.findMedlemByID(medlemID);
-                            controller.addMedlemToRestance(medlemName, medlemID);
-                            System.out.println(medlemName + ", " + medlemID + " er blevet tilføjet" +
-                                    " til restance listen.");
+                            if (controller.findMedlemByID(medlemID) != null) {
+                                controller.addMedlemToRestance(medlemName, medlemID);
+                                System.out.println(medlemName + ", " + medlemID + " er blevet tilføjet" +
+                                        " til restance listen.");
+                            } else
+                                System.out.println("Intet medlem fundet.");
                         }
                         case 2 -> {
                             System.out.println("Indtast medlemmets ID: ");
                             int medlemID = scan.nextInt();
                             scan.nextLine();
                             String medlemName = controller.findMedlemByID(medlemID);
-                            controller.removeMedlemFromRestance(medlemID);
-                            System.out.println(medlemName + ", " + medlemID + " er blevet fjernet" +
-                                    " fra restance listen.");
+                            if (controller.findMedlemByID(medlemID) != null) {
+                                controller.removeMedlemFromRestance(medlemID);
+                                System.out.println(medlemName + ", " + medlemID + " er blevet fjernet" +
+                                        " fra restance listen.");
+                            } else
+                                System.out.println("Intet medlem fundet.");
 
                         }
                         case 3 -> {

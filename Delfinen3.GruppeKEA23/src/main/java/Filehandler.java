@@ -10,6 +10,7 @@ public class Filehandler {
     PrintStream fileWriter;
     File file = new File("Medlemmere.csv");
     File file2 = new File("Resultater.csv");
+    File file3 = new File("Restance.csv");
 
     public void gemTilCSV(ArrayList<Medlem> medlemmere) {
         try {
