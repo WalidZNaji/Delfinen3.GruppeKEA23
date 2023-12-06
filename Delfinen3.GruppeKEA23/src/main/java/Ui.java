@@ -146,7 +146,7 @@ public class Ui {
             controller.addMedlem(medlemName, medlemAge,
                     konkurrenceSvømmerYesNo, aktivYesNo);
 
-            System.out.println(medlemName + " bliver tilføjet til databasen så snart programmet lukkes."); // Dobbelt tjek Mads' krav.
+            System.out.println(medlemName + " bliver tilføjet til databasen så snart programmet lukkes.");
             scan.nextLine();
         } catch (InputMismatchException e) {
             System.out.println("Ugyldig indtastning. Prøv igen.");

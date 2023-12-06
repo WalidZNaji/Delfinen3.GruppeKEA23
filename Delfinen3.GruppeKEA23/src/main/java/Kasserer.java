@@ -49,7 +49,6 @@ public class Kasserer {
 
             return totalIndkomst;
         }
-
         private double udregnUngeIndkomst() {
             double ungeIndkomst = 0.0;
 

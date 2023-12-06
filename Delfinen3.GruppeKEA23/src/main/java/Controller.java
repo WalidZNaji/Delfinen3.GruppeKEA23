@@ -28,7 +28,7 @@ public class Controller {
     public void addMedlem(String name, int age, boolean konkurrenceSvømmer, boolean aktiv) {
         int medlemID = generateUniqueMedlemID();
         database.addMedlem(name, age, konkurrenceSvømmer, aktiv);
-        System.out.println("Medlem added with MedlemID: " + medlemID);
+        System.out.println("MedlemID: " + medlemID); // Få det ind i Ui
     }
 
     private int generateUniqueMedlemID() {
