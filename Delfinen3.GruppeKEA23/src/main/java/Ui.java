@@ -12,9 +12,7 @@ public class Ui {
     }
 
     public void startProgram() {
-        controller.loadMedlemmereFraCSV();
-        controller.loadResultatFraCSV();
-        controller.loadRestanceFraCSV();
+        csvLoadAll();
         startMessage();
         startMenu();
     }
@@ -50,9 +48,7 @@ public class Ui {
                         case 3 -> {
                             System.out.println("Programmet er lukket.");
                             runAgain = false;
-                            controller.gemTilCSV();
-                            controller.gemResultaterTilCSV();
-                            controller.gemRestanceCSV();
+                            csvSaveAll();
 
                         }
 
@@ -215,10 +211,8 @@ public class Ui {
             System.out.print("Aktivt medlem? [y/n]: ");
             boolean aktivYesNo = getBooleanInput();
 
-            // Adder til oprindelig.
             controller.addMedlem(medlemName, medlemAge,
                     konkurrenceSvømmerYesNo, aktivYesNo);
-
 
             System.out.println(medlemName + " bliver tilføjet til databasen så snart programmet lukkes."); // Dobbelt tjek Mads' krav.
             scan.nextLine();
@@ -230,12 +224,12 @@ public class Ui {
 
     public void medlemsOversigt() {
         ArrayList<Medlem> listeFraCSV = controller.getMedlemmere();
-        for (Medlem m : listeFraCSV) {
-            System.out.println(m);
-        }
+            if (!listeFraCSV.isEmpty()) {
+                for (Medlem m : listeFraCSV) {
+                    System.out.println(m);
+                }
+            } else System.out.println("Ingen medlemmere at vise.");
     }
-
-
     public int getIntegerInput() {
         while (true) {
             try {
@@ -246,7 +240,6 @@ public class Ui {
             }
         }
     }
-
     public boolean getBooleanInput() {
         while (true) {
             try {
@@ -267,7 +260,6 @@ public class Ui {
         }
 
     }
-
     public void editResultat() {
         System.out.println("Indtast medlemmets navn");
         String brugerinput = scan.nextLine();
@@ -435,8 +427,6 @@ public class Ui {
 
         scan.nextLine();
     }
-
-
     public void listeAfDiscipliner() {
         System.out.println("""
                 1. Crawl
@@ -445,14 +435,12 @@ public class Ui {
                 4. Rygcrawl
                 """);
     }
-
     public void visResultater() {
         ArrayList<Resultat> resultaterFraCSV = controller.getResultater();
         for (Resultat r : resultaterFraCSV) {
             System.out.println(r);
         }
     }
-
     public void top5Swimmers() {
         System.out.println("Top 5 Svømmere:");
 
@@ -485,7 +473,6 @@ public class Ui {
         System.out.println("Top 5 Senior Svømmere:");
         displaySwimmers(topSenior, discipline);
     }
-
     private ArrayList<Resultat> findTopSwimmers(String discipline, String ageCategory) {
         ArrayList<Resultat> allResults = controller.getResultater();
         ArrayList<Resultat> topSwimmers = new ArrayList<>();
@@ -529,7 +516,6 @@ public class Ui {
         // Behold kun top 5
         return new ArrayList<>(topSwimmers.subList(0, Math.min(5, topSwimmers.size())));
     }
-
     private void displaySwimmers(ArrayList<Resultat> swimmers, String discipline) {
         for (Resultat swimmer : swimmers) {
             System.out.println(swimmer.getResultStringForDiscipline(discipline));
@@ -545,6 +531,16 @@ public class Ui {
         } else if (controller.getMedlemmereIRestance().isEmpty()) {
             System.out.println("Ingen medlemmere i restance");
         }
+    }
+    public void csvLoadAll() {
+        controller.loadMedlemmereFraCSV();
+        controller.loadResultatFraCSV();
+        controller.loadRestanceFraCSV();
+    }
+    public void csvSaveAll() {
+        controller.gemTilCSV();
+        controller.gemResultaterTilCSV();
+        controller.gemRestanceCSV();
     }
 
 
