@@ -5,22 +5,18 @@ public class Ui {
     private final Scanner scan;
     private final Controller controller;
 
-
     public Ui() {
         scan = new Scanner(System.in);
         controller = new Controller();
     }
-
     public void startProgram() {
         csvLoadAll();
         startMessage();
         startMenu();
     }
-
     public void startMessage() {
         System.out.println("Velkommen til Svømmeklubben Delfinen!");
     }
-
     public void startMenu() {
         int userInput = 0;
         boolean runAgain = true;
@@ -59,45 +55,22 @@ public class Ui {
             }
         }
     }
-
     public void administrativ() {
         boolean runAgain = true;
         int userInput;
 
         while (runAgain) {
-            System.out.print("""
-                    1. Opret medlem
-                    2. Vis medlemsoversigt
-                    3. Vis kontigent oversigt
-                    4. Vis enkelt medlems kontingent oversigt
-                    5. Restance
-                    6. Tilbage til hovedmenu
-                    """);
+            administrativMenuOversigt();
             try {
                 userInput = Integer.parseInt(scan.nextLine());
                 if (userInput < 1 || userInput > 6) {
                     System.out.println("Ugyldigt input. Indtast et tal mellem 1-6");
                 } else {
                     switch (userInput) {
-                        case 1 -> {
-                            createMedlem();
-                        }
-                        case 2 -> {
-                            medlemsOversigt();
-                        }
-                        case 3 -> {
-                            System.out.println("Samlet indkomst: ");
-                            System.out.println(controller.udregnIndkomst() + "kr");
-                        }
-                        case 4 -> {
-                            System.out.print("Søg efter medlems ID: ");
-                            int søgning = scan.nextInt();
-                            scan.nextLine();
-                            String navnPåMedlem = controller.findMedlemByID(søgning);
-                            double kontingentBetaling = controller.getSingleMedlemKontingent(søgning);
-                            System.out.println(navnPåMedlem + "s kontingent betaling: " + kontingentBetaling
-                            + "\n");
-                        }
+                        case 1 -> createMedlem();
+                        case 2 -> medlemsOversigt();
+                        case 3 -> visKontingentOversigt();
+                        case 4 -> visEnkeltMedlemsKontingentOversigt();
                         case 5 -> restanceMenu();
                         case 6 -> runAgain = false;
                     }
@@ -105,22 +78,15 @@ public class Ui {
             } catch (NumberFormatException e) {
                 System.out.println("Ugyldigt input. Indtast et tal mellem 1-4");
             }
-
         }
 
     }
-
     public void trænerMenu() {
         boolean runAgain = true;
         int userInput;
 
         while (runAgain) {
-            System.out.print("""
-                    1. Indtast resultat.
-                    2. Vis resultater oversigt.
-                    3. vis resultater over top 5
-                    4. Tilbage til hovedmenu.
-                    """);
+            trænerMenuOversigt();
             try {
                 userInput = Integer.parseInt(scan.nextLine());
                 if (userInput < 1 || userInput > 4) {
@@ -138,55 +104,22 @@ public class Ui {
             }
         }
     }
-
-
     public void restanceMenu() {
         boolean runAgain = true;
         int userInput;
 
         while (runAgain) {
-            System.out.println("""
-                    1. Tilføj medlem til restance.
-                    2. Fjern medlem fra restance.
-                    3. Vis oversigt over medlemmere i restance.
-                    4. Tilbage.
-                     """);
+            restanceMenuOversigt();
             try {
                 userInput = Integer.parseInt(scan.nextLine());
                 if (userInput < 1 || userInput > 4) {
                     System.out.println("Ugyldigt input. Indtast et tal mellem 1-4");
                 } else {
                     switch (userInput) {
-                        case 1 -> {
-                            System.out.println("Indtast medlemmets ID: ");
-                            int medlemID = scan.nextInt();
-                            scan.nextLine();
-                            String medlemName = controller.findMedlemByID(medlemID);
-                            if (controller.findMedlemByID(medlemID) != null) {
-                                controller.addMedlemToRestance(medlemName, medlemID);
-                                System.out.println(medlemName + ", " + medlemID + " er blevet tilføjet" +
-                                        " til restance listen.");
-                            } else
-                                System.out.println("Intet medlem fundet.");
-                        }
-                        case 2 -> {
-                            System.out.println("Indtast medlemmets ID: ");
-                            int medlemID = scan.nextInt();
-                            scan.nextLine();
-                            String medlemName = controller.findMedlemByID(medlemID);
-                            if (controller.findMedlemByID(medlemID) != null) {
-                                controller.removeMedlemFromRestance(medlemID);
-                                System.out.println(medlemName + ", " + medlemID + " er blevet fjernet" +
-                                        " fra restance listen.");
-                            } else
-                                System.out.println("Intet medlem fundet.");
-
-                        }
-                        case 3 -> {
-                            oversigtRestance();
-                        }
+                        case 1 -> restanceAddMedlem();
+                        case 2 -> restanceRemoveMedlem();
+                        case 3 -> oversigtRestance();
                         case 4 -> runAgain = false;
-
                     }
                 }
             } catch (NumberFormatException e) {
@@ -195,7 +128,6 @@ public class Ui {
             }
         }
     }
-
     public void createMedlem() {
 
         try {
@@ -542,8 +474,79 @@ public class Ui {
         controller.gemResultaterTilCSV();
         controller.gemRestanceCSV();
     }
-
-
+    public void restanceAddMedlem() {
+        try {
+            System.out.println("Indtast medlemmets ID: ");
+            int medlemID = scan.nextInt();
+            scan.nextLine();
+            String medlemName = controller.findMedlemByID(medlemID);
+            if (controller.findMedlemByID(medlemID) != null) {
+                controller.addMedlemToRestance(medlemName, medlemID);
+                System.out.println(medlemName + ", " + medlemID + " er blevet tilføjet" +
+                        " til restance listen.");
+            } else
+                System.out.println("Intet medlem fundet.");
+        } catch (InputMismatchException e) {
+            System.out.println("Søgning efter medlemmets ID kræver hel tal. ");
+            scan.nextLine();
+        }
+    }
+    public void restanceRemoveMedlem() {
+        try {
+            System.out.println("Indtast medlemmets ID: ");
+            int medlemID = scan.nextInt();
+            scan.nextLine();
+            String medlemName = controller.findMedlemByID(medlemID);
+            if (controller.findMedlemByID(medlemID) != null) {
+                controller.removeMedlemFromRestance(medlemID);
+                System.out.println(medlemName + ", " + medlemID + " er blevet fjernet" +
+                        " fra restance listen.");
+            } else
+                System.out.println("Intet medlem fundet.");
+        } catch (InputMismatchException e) {
+            System.out.println("Søgning efter medlemmets ID kræver hel tal. ");
+            scan.nextLine();
+        }
+    }
+    public void trænerMenuOversigt() {
+        System.out.print("""
+                    1. Indtast resultat.
+                    2. Vis resultater oversigt.
+                    3. vis resultater over top 5
+                    4. Tilbage til hovedmenu.
+                    """);
+    }
+    public void administrativMenuOversigt() {
+        System.out.print("""
+                    1. Opret medlem
+                    2. Vis medlemsoversigt
+                    3. Vis kontigent oversigt
+                    4. Vis enkelt medlems kontingent oversigt
+                    5. Restance menu
+                    6. Tilbage til hovedmenu
+                    """);
+    }
+    public void visKontingentOversigt() {
+        System.out.println("Samlet indkomst: ");
+        System.out.println(controller.udregnIndkomst() + "kr");
+    }
+    public void visEnkeltMedlemsKontingentOversigt() {
+        System.out.print("Søg efter medlems ID: ");
+        int søgning = scan.nextInt();
+        scan.nextLine();
+        String navnPåMedlem = controller.findMedlemByID(søgning);
+        double kontingentBetaling = controller.getSingleMedlemKontingent(søgning);
+        System.out.println(navnPåMedlem + "s kontingent betaling: " + kontingentBetaling
+                + "\n");
+    }
+    public void restanceMenuOversigt() {
+        System.out.println("""
+                    1. Tilføj medlem til restance.
+                    2. Fjern medlem fra restance.
+                    3. Vis oversigt over medlemmere i restance.
+                    4. Tilbage.
+                     """);
+    }
 }
 
 
