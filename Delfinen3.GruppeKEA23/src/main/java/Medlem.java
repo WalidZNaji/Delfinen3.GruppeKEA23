@@ -40,26 +40,6 @@ public Medlem() {
 
     //_____________________________________________________________________________
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public void setMedlemID(int medlemID) {
-        this.medlemID = medlemID;
-    }
-
-    public void setKonkurrenceSvømmer(boolean konkurrenceSvømmer) {
-        this.konkurrenceSvømmer = konkurrenceSvømmer;
-    }
-
-    public void setAktiv(boolean aktiv) {
-        this.aktiv = aktiv;
-    }
-
     public String toString() {
 
         String konkurrenceSvømmer = isKonkurrenceSvømmer() ? "Konkurrencesvømmer" : "Ikke Konkurrencesvømmer";

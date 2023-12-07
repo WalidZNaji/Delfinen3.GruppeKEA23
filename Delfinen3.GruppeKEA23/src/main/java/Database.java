@@ -39,7 +39,7 @@ public class Database {
     }
 
     public void addMedlem(String name, int age, boolean konkurrenceSvømmer, boolean aktiv) {
-        int medlemID = generateUniqueMedlemID();
+        int medlemID = generateUniqueMedlemID(); // Generer uniks medlemsID når der oprettes nyt Medlem.
         medlemmere.add(new Medlem(name, age, medlemID, konkurrenceSvømmer, aktiv));
     }
 
@@ -118,25 +118,10 @@ public class Database {
     public double getCrawlTid() {
         return resultat.getCrawlTid();
     }
-    public double getBrystTid() {
-        return resultat.getBrystTid();
-    }
-    public double getbutterflyTid() {
-        return resultat.getButterflyTid();
-    }
-    public double getrygcrawlTid() {
-        return resultat.getRygCrawlTid();
-    }
 
     // Restance
     public ArrayList<Restance> getMedlemmereIRestance() {
         return medlemmereIRestance;
-    }
-    public String getRestanceName() {
-        return restance.getName();
-    }
-    public int getRestanceID() {
-        return restance.getMedlemID();
     }
     public void addMedlemToRestance(String name, int medlemId) {
         restance = new Restance(name, medlemId);
