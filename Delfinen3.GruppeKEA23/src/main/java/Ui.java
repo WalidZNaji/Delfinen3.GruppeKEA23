@@ -22,7 +22,7 @@ public class Ui {
         boolean runAgain = true;
 
         while (runAgain) {
-            System.out.println("Log ind som:");
+            System.out.println("Log ind:");
             System.out.print("""
                     1. Administrativ menu
                     2. Træner menu
