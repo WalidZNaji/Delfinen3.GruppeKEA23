@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Ui {
@@ -153,7 +152,6 @@ public class Ui {
             scan.nextLine();
         }
     }
-
     public void medlemsOversigt() {
         ArrayList<Medlem> listeFraCSV = controller.getMedlemmere();
             if (!listeFraCSV.isEmpty()) {

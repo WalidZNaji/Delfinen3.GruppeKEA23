@@ -101,23 +101,6 @@ public class Database {
         }
         return lokalListe;
     }
-    public void setCrawlTid(double nyCrawlTid) {
-        resultat.setCrawlTid(nyCrawlTid);
-    }
-    public void setBrystTid(double nyBrystTid) {
-        resultat.setBrystTid(nyBrystTid);
-    }
-
-    public void setButterflyTid(double nyButterflyTid) {
-        resultat.setButterflyTid(nyButterflyTid);
-    }
-
-    public void setRygCrawlTid(double nyRygCrawlTid) {
-        resultat.setRygCrawlTid(nyRygCrawlTid);
-    }
-    public double getCrawlTid() {
-        return resultat.getCrawlTid();
-    }
 
     // Restance
     public ArrayList<Restance> getMedlemmereIRestance() {

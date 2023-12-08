@@ -56,7 +56,7 @@ public class Controller {
         return database.medlemmere;
     }
 
-    public void loadMedlemmereFraCSV () {
+    public void loadMedlemmereFraCSV() {
          database.loadMedlemmereFromCSV();
     }
     public void loadResultatFraCSV() {
@@ -82,24 +82,6 @@ public class Controller {
     }
     public ArrayList<Resultat> getResultater() {
         return database.getResultater();
-    }
-
-    public void setCrawlTid(double nyCrawlTid) {
-        database.setCrawlTid(nyCrawlTid);
-    }
-    public void setBrystTid(double nyBrystTid) {
-        database.setBrystTid(nyBrystTid);
-    }
-
-    public void setButterflyTid(double nyButterflyTid) {
-        database.setButterflyTid(nyButterflyTid);
-    }
-
-    public void setRygCrawlTid(double nyRygCrawlTid) {
-        database.setRygCrawlTid(nyRygCrawlTid);
-    }
-    public double getCrawlTid() {
-        return database.getCrawlTid();
     }
     public ArrayList<Restance> getMedlemmereIRestance() {
         return database.medlemmereIRestance;
