@@ -7,7 +7,7 @@ public class Kasserer {
     public Kasserer(Controller controller) {
         this.controller = controller;
     }
-    public double getSingleMedlemKontingent(int medlemID) {
+    public double getSingleMedlemKontingent(int medlemID) { // Done
         double ung = 0;
         for (Medlem m : controller.getMedlemmere()) {
             if (medlemID == m.getMedlemID()) {
