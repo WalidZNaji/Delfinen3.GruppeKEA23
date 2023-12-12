@@ -327,7 +327,6 @@ public class Ui {
                     }
                 }
             }
-
             if (inputValid) { // Kontrol før ændring.
                 if (!existingResultat.isEmpty()) {
                     Resultat existingResult = existingResultat.get(0);
@@ -351,6 +350,7 @@ public class Ui {
                     );
 
                     System.out.println(medlemToEdit.getName() + "'s resultat er blevet tilføjet.");
+
                 }
             }
         }
