@@ -11,8 +11,6 @@ class KassererTest {
     void setup() {
         controller = new Controller();
     }
-
-
 @Test
     void generateIncomeOverviewJuniorTest() {
         premadeMedlemmereJunior();

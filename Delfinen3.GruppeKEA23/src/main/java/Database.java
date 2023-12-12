@@ -102,7 +102,7 @@ public class Database {
         return lokalListe;
     }
 
-    // Restance
+    // Restance - Metoder
     public ArrayList<Restance> getMedlemmereIRestance() {
         return medlemmereIRestance;
     }
